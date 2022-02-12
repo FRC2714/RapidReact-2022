@@ -35,6 +35,7 @@ public class Robot extends TimedRobot {
     autoChooser = new SendableChooser<>();
 
     autoChooser.setDefaultOption("Normal Auton", robotContainer.getNormalauto());
+    autoChooser.addOption("Do Nothing", robotContainer.getNothingAuto());
 
     SmartDashboard.putData("Auto Picker", autoChooser);
   }
