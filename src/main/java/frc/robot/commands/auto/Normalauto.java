@@ -16,15 +16,14 @@ public class Normalauto extends SequentialCommandGroup {
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand testSpline =
-                RamseteGenerator.getRamseteCommand(
-                        drivetrain,
-                  
-                      List.of(
-                        new Pose2d(Units.feetToMeters(1.50), Units.feetToMeters(23.00), Rotation2d.fromDegrees(3.00)),
-                        new Pose2d(Units.feetToMeters(5.00), Units.feetToMeters(5.00), Rotation2d.fromDegrees(5.00))
-                    ),
-                    Units.feetToMeters(3), Units.feetToMeters(3), true
-                );
+            RamseteGenerator.getRamseteCommand(
+            drivetrain,
+            List.of(
+                new Pose2d(Units.feetToMeters(9.93), Units.feetToMeters(6.45), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(11.50), Units.feetToMeters(23.00), Rotation2d.fromDegrees(0.00))
+            ),
+            Units.feetToMeters(3), Units.feetToMeters(3), true
+        );
                 addCommands(
                     sequence(
                         new InstantCommand(() -> drivetrain.resetOdometry(testSpline.getInitialPose())),

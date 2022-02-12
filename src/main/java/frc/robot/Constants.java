@@ -16,7 +16,7 @@ import edu.wpi.first.math.util.Units;
 public final class Constants {
     public static final class DriveConstants {
         public static double kMaxAngularSpeed = 2 * Math.PI; // one rotation per second
-        public static double kTrackWidth = 0.91; // meters
+        public static double kTrackWidth = 0.71; // meters
         public static double kWheelRadius = 0.0762; // meters
         public static double kShaftEncoderResolution = 2048; // counts per revolution bore encoder
         public static double positionChangePerRotation = 8.73; // Motor rotation per shaft rotation
