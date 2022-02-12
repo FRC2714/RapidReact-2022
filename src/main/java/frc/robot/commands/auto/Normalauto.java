@@ -20,10 +20,10 @@ public class Normalauto extends SequentialCommandGroup {
                         drivetrain,
                   
                       List.of(
-                                new Pose2d(Units.feetToMeters(11.89), Units.feetToMeters(24.65), Rotation2d.fromDegrees(0)),
-                                new Pose2d(Units.feetToMeters(15.46), Units.feetToMeters(24.68), Rotation2d.fromDegrees(0))
-                        ),
-                        Units.feetToMeters(13), Units.feetToMeters(8), true
+                        new Pose2d(Units.feetToMeters(1.50), Units.feetToMeters(23.00), Rotation2d.fromDegrees(3.00)),
+                        new Pose2d(Units.feetToMeters(5.00), Units.feetToMeters(5.00), Rotation2d.fromDegrees(5.00))
+                    ),
+                    Units.feetToMeters(3), Units.feetToMeters(3), true
                 );
                 addCommands(
                     sequence(
