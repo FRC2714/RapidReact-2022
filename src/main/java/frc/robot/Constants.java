@@ -73,7 +73,7 @@ public final class Constants {
         public static double kVelocityTolerance = 115;
     }
 
-    public static final class ConveyorConstants {
+    public static final class IndexConstants {
         public static int kleftConveyorPort = 8;
         public static int krightConveyorPort = 9;
         public static int ksmIndexPort = 10;
