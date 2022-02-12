@@ -6,8 +6,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.subsystems.*;
-import frc.robot.utils.CustomRamseteCommand;
-import frc.robot.utils.RamseteGenerator;
+import frc.robot.utils.*;
 
 import java.util.List;
 
@@ -24,7 +23,7 @@ public class Normalauto extends SequentialCommandGroup {
                                 new Pose2d(Units.feetToMeters(11.89), Units.feetToMeters(24.65), Rotation2d.fromDegrees(0)),
                                 new Pose2d(Units.feetToMeters(15.46), Units.feetToMeters(24.68), Rotation2d.fromDegrees(0))
                         ),
-                        Units.feetToMeters(13), Units.feetToMeters(8), false
+                        Units.feetToMeters(13), Units.feetToMeters(8), true
                 );
                 addCommands(
                     sequence(

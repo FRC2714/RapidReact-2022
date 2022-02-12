@@ -93,9 +93,9 @@ public class Drivetrain extends SubsystemBase {
         rMotor1.setSmartCurrentLimit(60);
         rMotor2.setSmartCurrentLimit(60);
 
-        rMotor0.setInverted(true);
-        rMotor1.setInverted(true);
-        rMotor2.setInverted(true);
+        rMotor0.setInverted(false);
+        rMotor1.setInverted(false);
+        rMotor2.setInverted(false);
 
         drive = new DifferentialDrive(lMotor0, rMotor0);
         drive.setSafetyEnabled(false);
