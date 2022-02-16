@@ -20,7 +20,7 @@ public final class Constants {
         public static double kWheelRadius = 0.0762; // meters
         public static double kShaftEncoderResolution = 2048; // counts per revolution bore encoder
         public static double positionChangePerRotation = 8.73; // Motor rotation per shaft rotation
-        public static double kMaxVelocity = 13; // feet per second
+        public static double kMaxVelocity = 3; // feet per second
         public static double kMaxAcceleration = 3; // Max Accel fet per second squared
 
         public static double kStatic = 0.28; // Constant feedforward term for the robot drive.
@@ -54,6 +54,7 @@ public final class Constants {
 
         public static DifferentialDriveKinematics kDriveKinematics
                 = new DifferentialDriveKinematics(DriveConstants.kTrackWidth);
+                
     }
 
     public static final class IntakeConstants {

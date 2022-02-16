@@ -177,8 +177,8 @@ public class Drivetrain extends SubsystemBase {
      * @param rightVolts the commanded right output
      */
     public void tankDriveVolts(double leftVolts, double rightVolts) {
-        lMotor0.set(leftVolts / RobotController.getBatteryVoltage());
-        rMotor0.set(-rightVolts / RobotController.getBatteryVoltage());
+        lMotor0.setVoltage(leftVolts);
+        rMotor0.setVoltage(rightVolts);
     }
 
     /**
@@ -241,15 +241,16 @@ public class Drivetrain extends SubsystemBase {
      * @return the robot's heading in degrees, from 180 to 180
      */
     public double getHeading() {
-        return Math.IEEEremainder(navx.getAngle(), 360) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
+        return navx.getRotation2d().getDegrees();
     }
 
     /**
      * @return True if external encoders and internal encoders conflict
      */
-    public boolean isEncoderError() {
+   /* public boolean isEncoderError() {
         return internalOdometry.getPoseMeters().getTranslation().getDistance(externalOdometry.getPoseMeters().getTranslation()) > 0.5;
     }
+    /
 
     /**
      * Returns the turn rate of the robot.
@@ -263,6 +264,7 @@ public class Drivetrain extends SubsystemBase {
     public DifferentialDriveKinematics getKinematics() {
         return DriveConstants.kDriveKinematics;
     }
+    
 
     public void resetAll() {
         resetOdometry(new Pose2d());
