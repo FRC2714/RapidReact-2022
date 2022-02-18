@@ -19,13 +19,16 @@ public class Normalauto extends SequentialCommandGroup {
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(9.93), Units.feetToMeters(6.45), Rotation2d.fromDegrees(0.00)),
-                new Pose2d(Units.feetToMeters(11.50), Units.feetToMeters(23.00), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(29.24), Units.feetToMeters(20.04), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(22.85), Rotation2d.fromDegrees(0.00))
             ),
-            Units.feetToMeters(3), Units.feetToMeters(3), true
+            Units.feetToMeters(10), Units.feetToMeters(10), true
         );
                 addCommands(
                     sequence(
+                       // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //was 2300
+                    ),
+                    deadline(
                         new InstantCommand(() -> drivetrain.resetOdometry(testSpline.getInitialPose())),
                         testSpline.andThen(() -> drivetrain.tankDriveVolts(0,0))
                     )
