@@ -19,7 +19,7 @@ public class SingleShot extends CommandBase {
 
     @Override
     public void initialize() {
-        index.setIndexState(Index.IndexState.DEFAULT);
+        index.setIndexState(Index.IndexState.SHOOTING);
         intake.setIntakePower(0.5);
     }
 
