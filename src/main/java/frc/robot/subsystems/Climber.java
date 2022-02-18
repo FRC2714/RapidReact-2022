@@ -3,7 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.*;
 import com.revrobotics.CANSparkMax.ControlType;
 
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ClimberConstants;
 
 
@@ -89,10 +88,6 @@ public class Climber {
     }
 
 
-    @Override
-    public void periodic() {
-
-    }
 
     public double getPosition() {
         return cENC.getPosition();

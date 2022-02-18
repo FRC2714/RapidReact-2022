@@ -26,8 +26,8 @@ public class TeleOpShooter extends CommandBase {
     @Override
     public void execute() {
         shooter.setDynamicRpm();
-        SmartDashboard.putNumber("Current Output 1", shooter.sM1.getOutputCurrent());
-        SmartDashboard.putNumber("Current Output 2", shooter.sM2.getOutputCurrent());
+        SmartDashboard.putNumber("Current Output 1", shooter.shooterMotor1.getOutputCurrent());
+        SmartDashboard.putNumber("Current Output 2", shooter.shooterMotor2.getOutputCurrent());
     }
 
     @Override

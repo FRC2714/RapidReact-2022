@@ -2,24 +2,18 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.commands.Intake.ConveyorPeriodic;
-
 import frc.robot.Constants.*;
 
-
-
 public class Index {
-    public CANSparkMax lCON;
-    public CANSparkMax rCON;
-    public CANSparkMax sMI0;
+    public CANSparkMax lIndex;
+    public CANSparkMax rIndex;
+    public CANSparkMax innerTower;
+    public CANSparkMax outerTower;
 
 
 
     public enum IndexState {
         SHOOTING,
-        UNRESTRICTED_SHOOTING,
         INTAKING,
         EXTAKING,
         DEFAULT
@@ -27,30 +21,26 @@ public class Index {
 
     private IndexState indexState = IndexState.DEFAULT;
 
-    private boolean enabled = false;
-
     public Index(Boolean shooterAtVelocity) {
-        lCON = new CANSparkMax(IndexConstants.kleftConveyorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-        rCON = new CANSparkMax(IndexConstants.krightConveyorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-        sMI0 = new CANSparkMax(IndexConstants.ksmIndexPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        lIndex = new CANSparkMax(IndexConstants.kleftIndexPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        rIndex = new CANSparkMax(IndexConstants.krightIndexPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        innerTower = new CANSparkMax(IndexConstants.kiTowerPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        outerTower = new CANSparkMax(IndexConstants.koTowerPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        lCON.setSmartCurrentLimit(30);
-        rCON.setSmartCurrentLimit(30);
-        sMI0.setSmartCurrentLimit(30);
+        lIndex.setSmartCurrentLimit(30);
+        rIndex.setSmartCurrentLimit(30);
+        innerTower.setSmartCurrentLimit(30);
+        outerTower.setSmartCurrentLimit(30);
 
-        lCON.setInverted(true);
-        rCON.setInverted(false);
-        sMI0.setInverted(true);
+        lIndex.setInverted(true);
+        rIndex.setInverted(false);
+        innerTower.setInverted(true);
+        outerTower.setInverted(false);
 
-        lCON.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        rCON.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        sMI0.setIdleMode(CANSparkMax.IdleMode.kBrake);
-    }
-
-    public void moveAll(double power) {
-        lCON.set(power);
-        rCON.set(power);
-        sMI0.set(power);
+        lIndex.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        rIndex.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        innerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        outerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
     }
 
     public void setIndexState(IndexState indexState) {
@@ -58,39 +48,39 @@ public class Index {
     }
 
 
+    public void updateIndexMotion(){
+        double lIndexPower = 0;
+        double rIndexPower = 0;
+        double innerTowerPower = 0;
+        double outerTowerPower = 0;
 
-    public void updateIndexMotion(boolean horiz, boolean vert, boolean reversed){
-        double horizontalPower = indexState == IndexState.SHOOTING  ? 0.5 : 0.3;
-
-        double verticalPower = indexState == IndexState.SHOOTING ? 0.6 : 0.45;
-
-        if(indexState.equals(IndexState.UNRESTRICTED_SHOOTING)) {
-            verticalPower = 1;
-            horizontalPower = 1;
+        if(indexState.equals(IndexState.SHOOTING)){
+            lIndexPower = 1;
+            rIndexPower = 1;
+            innerTowerPower = 1;
+            outerTowerPower = 1;
         }
 
-        if (reversed) {
-            horizontalPower *= -1;
-            verticalPower *= -1;
+        if(indexState.equals(IndexState.EXTAKING)){
+            lIndexPower = -1;
+            rIndexPower = -1;
+            innerTowerPower = -1;
+            outerTowerPower = -1;
+        }
+        if(indexState.equals(IndexState.INTAKING)){
+            lIndexPower = 1;
+            rIndexPower = 1;
+            innerTowerPower = 1;
         }
 
-        if(horiz)
-            lCON.set(horizontalPower);
-        else
-            if (indexState != indexState.EXTAKING)
-                lCON.set(0);
-
-        if(vert)
-            sMI0.set(verticalPower);
-        else
-            if(indexState != indexState.EXTAKING)
-                sMI0.set(0);
-    }
-
-    @Override
-    public void periodic() {
-
-        SmartDashboard.putString("Index State", indexState.toString());
+        if(indexState.equals(IndexState.DEFAULT)){
+            lIndexPower = rIndexPower = innerTowerPower = outerTowerPower = 0;
+        }
+      
+        lIndex.set(lIndexPower);
+        rIndex.set(rIndexPower);
+        innerTower.set(innerTowerPower); 
+        outerTower.set(outerTowerPower);
     }
 
     public IndexState getIndexState() {
@@ -99,14 +89,7 @@ public class Index {
 
     public void disable() {
         indexState = IndexState.DEFAULT;
-        moveAll(0);
     }
 
-    public boolean enabled() {
-        return enabled;
-    }
 
-    public void initDefaultCommand(Boolean shooterAtVelocity) {
-        setDefaultCommand(new IndexPeriodic(this, shooterAtVelocity));
-    }
 }

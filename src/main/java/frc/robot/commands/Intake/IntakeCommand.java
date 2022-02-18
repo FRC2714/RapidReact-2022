@@ -27,7 +27,7 @@ public class IntakeCommand extends CommandBase{
             index.setIndexState(IndexState.EXTAKING);
             break;
             
-            case INTAKE:s
+            case INTAKE:
             intake.intakeBalls();            
             index.setIndexState(IndexState.INTAKING);
             break;
