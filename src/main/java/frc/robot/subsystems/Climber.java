@@ -7,89 +7,89 @@ import frc.robot.Constants.ClimberConstants;
 
 
 public class Climber {
-    private CANSparkMax cM1;
-    private CANSparkMax cM2;
+    private CANSparkMax lClimberMotor;
+    private CANSparkMax rClimberMotor;
     
-    private SparkMaxPIDController cPID;
+    private SparkMaxPIDController climberPID;
     
-    private RelativeEncoder cENC;
+    private RelativeEncoder climberEncoder;
 
     private double targetHeightInches = 0.0;
 
     public Climber(){
-        cM1 = new CANSparkMax(ClimberConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-        cM2 = new CANSparkMax(ClimberConstants.kRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-        cENC = cM1.getEncoder();
+        lClimberMotor = new CANSparkMax(ClimberConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        rClimberMotor = new CANSparkMax(ClimberConstants.kRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        climberEncoder = lClimberMotor.getEncoder();
 
-        cM1.setSmartCurrentLimit(30);
+        lClimberMotor.setSmartCurrentLimit(30);
 
-        cM2.follow(cM1, true);
+        rClimberMotor.follow(lClimberMotor, true);
 
-        cPID = cM1.getPIDController();
-        cPID.setP(ClimberConstants.kP);
+        climberPID = lClimberMotor.getPIDController();
+        climberPID.setP(ClimberConstants.kP);
 
-        cM1.setIdleMode(CANSparkMax.IdleMode.kBrake);
-        cM2.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        lClimberMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
+        rClimberMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
 
-        cENC.setPosition(0);
+        climberEncoder.setPosition(0);
     }
 
     public void setPower(double power){
-        cM1.set(power);
+        lClimberMotor.set(power);
     }
 
     public void setClimberDown(){
-       if(cENC.getPosition() > ClimberConstants.kMinHeightTicks){
+       if(climberEncoder.getPosition() > ClimberConstants.kMinHeightTicks){
             setPower(-0.75);
         } else setPower(0);
     }
 
     public void setClimberUp(){
-        if(cENC.getPosition() <= ClimberConstants.kMaxHeightTicks){
+        if(climberEncoder.getPosition() <= ClimberConstants.kMaxHeightTicks){
             setPower(1);
         } else setPower(0);
     }
 
     public void setPIDTargetHeight(double targetHeightInches) {
         this.targetHeightInches = targetHeightInches;
-        cPID.setReference(targetHeightInches / (2 * Math.PI * ClimberConstants.kSprocketRadius), ControlType.kPosition);
+        climberPID.setReference(targetHeightInches / (2 * Math.PI * ClimberConstants.kSprocketRadius), ControlType.kPosition);
     }
 
     public boolean atSetpoint() {
-        return Math.abs(targetHeightInches - (cENC.getPosition() * 2 * Math.PI * ClimberConstants.kSprocketRadius))
+        return Math.abs(targetHeightInches - (climberEncoder.getPosition() * 2 * Math.PI * ClimberConstants.kSprocketRadius))
                     < ClimberConstants.kToleranceInches;
     }
 
     public double getClimberHeightInches(){
-        return Math.abs(targetHeightInches - (cENC.getPosition() * 2 * Math.PI * ClimberConstants.kSprocketRadius));
+        return Math.abs(targetHeightInches - (climberEncoder.getPosition() * 2 * Math.PI * ClimberConstants.kSprocketRadius));
     }
 
     public void setToTargetTicks(double targetTicks){
-        if(Math.abs(cENC.getPosition() - targetTicks) < 200){
-            cM1.set(0);
-        } else if(cENC.getPosition() < targetTicks)
-            cM1.set(0.6);
+        if(Math.abs(climberEncoder.getPosition() - targetTicks) < 200){
+            lClimberMotor.set(0);
+        } else if(climberEncoder.getPosition() < targetTicks)
+            lClimberMotor.set(0.6);
         else
-            cM1.set(-0.6);
+            lClimberMotor.set(-0.6);
     }
 
     public void setToTargetInches(double targetHeightInches){
         this.targetHeightInches = targetHeightInches;
         if(atSetpoint())
-            cM1.set(0);
+            lClimberMotor.set(0);
         else if(getClimberHeightInches() < targetHeightInches)
-            cM1.set(0.6);
+            lClimberMotor.set(0.6);
         else
-            cM1.set(-0.6);
+            lClimberMotor.set(-0.6);
     }
 
     public void disable() {
-        cM1.set(0);
+        lClimberMotor.set(0);
     }
 
 
 
     public double getPosition() {
-        return cENC.getPosition();
+        return climberEncoder.getPosition();
     }
 }
