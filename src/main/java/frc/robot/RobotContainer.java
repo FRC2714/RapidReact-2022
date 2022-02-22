@@ -11,6 +11,7 @@ import frc.robot.commands.auto.Normalauto;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -22,9 +23,20 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   private final Drivetrain drivetrain = new Drivetrain();
   private static Joystick driverStick = new Joystick(0);
+  private static Joystick operatorStick = new Joystick(1);
+  
+  private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
+  private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
+  private JoystickButton driverLeftShoulder = new JoystickButton(driverStick, 5);
 
-
-
+  private JoystickButton operatorAButton = new JoystickButton(operatorStick, 1);
+  private JoystickButton operatorBButton = new JoystickButton(operatorStick, 2);
+  private JoystickButton operatorLeftShoulder = new JoystickButton(operatorStick, 5);
+  private JoystickButton operatorRightShoulder = new JoystickButton(operatorStick, 6);
+  private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
+  private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
+  private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
+  private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings

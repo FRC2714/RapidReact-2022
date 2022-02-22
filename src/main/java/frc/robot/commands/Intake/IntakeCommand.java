@@ -1,4 +1,4 @@
- package frc.robot.commands.intake;
+ package frc.robot.commands.Intake;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Index;
@@ -8,12 +8,10 @@ import frc.robot.subsystems.Intake;
 public class IntakeCommand extends CommandBase{
 
     private Intake intake; 
-    private Index index;
     private IntakeType intakeType;
     
-    public IntakeCommand(Index index, Intake intake, IntakeType intakeType){
+    public IntakeCommand(Intake intake, IntakeType intakeType){
         this.intakeType = intakeType;
-        this.index = index;
         this.intake = intake;
     }
 
@@ -24,15 +22,14 @@ public class IntakeCommand extends CommandBase{
         switch(intakeType){
             case EXTAKE:
             intake.extakeBalls(); 
-            index.setIndexState(IndexState.EXTAKING);
+            Index.setIndexState(Index.IndexState.EXTAKING); //How do I get this to work
             break;
             
             case INTAKE:
             intake.intakeBalls();            
-            index.setIndexState(IndexState.INTAKING);
+            Index.setIndexState(Index.IndexState.INTAKING);
             break;
         }
-
     }
 
     
@@ -41,7 +38,6 @@ public class IntakeCommand extends CommandBase{
     public enum IntakeType{
         EXTAKE,
         INTAKE
-
     }
 
 }
