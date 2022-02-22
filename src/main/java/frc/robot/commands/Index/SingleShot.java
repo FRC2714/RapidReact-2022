@@ -3,20 +3,23 @@ package frc.robot.commands.Index;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Index;
 import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Index.IndexState;
-//plz 
+
 public class SingleShot extends CommandBase {
 
     private Shooter shooter;
     private Index index;
     private Intake intake;
+    private Serializer serializer;
     private IndexType indexType;
 
-    public SingleShot(Shooter shooter, Intake intake, Index index, IndexType indexType){
+    public SingleShot(Shooter shooter, Intake intake, Index index, Serializer serializer, IndexType indexType){
         this.shooter = shooter;
         this.index = index;
         this.intake = intake;
+        this.serializer = serializer; 
         this.indexType = indexType;
     }
 
@@ -24,12 +27,13 @@ public class SingleShot extends CommandBase {
     public void initialize() {
         switch(indexType){
             case LOADING:
-                intake.serializeBalls();
+                serializer.serializeBalls();
                 index.setIndexState(Index.IndexState.LOADING);
                 index.isStored();
                 if(index.ballStored) break;
             case MULTISHOT:
                 //set shooter to target rpm
+                //AlignToTarget
                 if(index.ballStored||shooter.atSetpoint()){
                     index.setIndexState(IndexState.SHOOTING);
                     if(!index.ballStored){
@@ -48,11 +52,13 @@ public class SingleShot extends CommandBase {
                 }
             case SINGLESHOT:
                 //set shooter to targetRPM
+                //AlignToTarget
                 if(shooter.atSetpoint()){
                     //shoot
+                    break;
                 }
             case INDEX:
-                intake.serializeBalls();
+                serializer.serializeBalls();
                 index.setIndexState(Index.IndexState.LOADING);
                 index.isStored();
                 if(index.ballStored){

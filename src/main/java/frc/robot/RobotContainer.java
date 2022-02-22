@@ -24,7 +24,7 @@ public class RobotContainer {
   private final Drivetrain drivetrain = new Drivetrain();
   private static Joystick driverStick = new Joystick(0);
   private static Joystick operatorStick = new Joystick(1);
-  
+
   private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
   private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
   private JoystickButton driverLeftShoulder = new JoystickButton(driverStick, 5);
@@ -54,7 +54,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    operatorAButton.whileHeld(new AutoIntake(shooter,intake, conveyor, AutoIntake.IntakeType.INTAKE));
+    operatorYButton.whileHeld(new AutoIntake(shooter,intake, conveyor, AutoIntake.IntakeType.EXTAKE));
+
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
