@@ -57,7 +57,10 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static int kIntakeMotorPort = 7;
+        public static int kLIntakeMotorPort = 7;
+        public static int kRIntakeMotorPort = 8;
+        public static int kLSerializerPort = 9;
+        public static int kRSerializerPort = 10;
 
         public static double kIntakePower = 1; // was 1.0
         public static double kSerializerPower = 0.5; //was 0.6
@@ -74,8 +77,7 @@ public final class Constants {
     }
 
     public static final class IndexConstants {
-        public static int kleftIndexPort = 8;
-        public static int krightIndexPort = 9;
+
         public static int kiTowerPort = 10;
         public static int koTowerPort = 17;
     }
