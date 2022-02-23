@@ -247,10 +247,10 @@ public class Drivetrain extends SubsystemBase {
     /**
      * @return True if external encoders and internal encoders conflict
      */
-   /* public boolean isEncoderError() {
+   public boolean isEncoderError() {
         return internalOdometry.getPoseMeters().getTranslation().getDistance(externalOdometry.getPoseMeters().getTranslation()) > 0.5;
     }
-    /
+    
 
     /**
      * Returns the turn rate of the robot.
@@ -299,7 +299,7 @@ public class Drivetrain extends SubsystemBase {
 
         internalOdometry.update(Rotation2d.fromDegrees(getHeading()),
                 (leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius,
-                (leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
+                (rightNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
 
         live_dashboard.getEntry("robotX").setDouble(Units.metersToFeet(getPose().getTranslation().getX()));
         live_dashboard.getEntry("robotY").setDouble(Units.metersToFeet(getPose().getTranslation().getY()));

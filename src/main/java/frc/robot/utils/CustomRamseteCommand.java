@@ -222,7 +222,7 @@ public class CustomRamseteCommand extends CommandBase {
                 Units.metersToFeet(drivetrain.getPose().getTranslation().getY()) +
                 " | Final Heading " + drivetrain.getPose().getRotation().getDegrees());
     }
-/*
+
     @Override
     public boolean isFinished() {
         if (drivetrain.isEncoderError())
@@ -230,7 +230,7 @@ public class CustomRamseteCommand extends CommandBase {
 
         return m_timer.advanceIfElapsed(m_trajectory.getTotalTimeSeconds()) || drivetrain.isEncoderError();
     }
-*/
+
     public Pose2d getInitialPose() {
         return m_trajectory.getInitialPose();
     }
