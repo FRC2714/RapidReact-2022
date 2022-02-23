@@ -85,4 +85,8 @@ public class RobotContainer {
 public Command getNothingAuto(){
   return new InstantCommand(() -> drivetrain.tankDriveVolts(0,0));
 }
+
+public Command getStraightLineAuto(){
+  return new InstantCommand(() -> drivetrain.tankDriveVolts(0,0));
+}
 }

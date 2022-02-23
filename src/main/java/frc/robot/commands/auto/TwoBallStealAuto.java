@@ -29,7 +29,7 @@ public class TwoBallStealAuto extends SequentialCommandGroup {
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(31.107), Units.feetToMeters(24.797), Rotation2d.fromDegrees(45)),
+                new Pose2d(Units.feetToMeters(31), Units.feetToMeters(24), Rotation2d.fromDegrees(45)),
                 new Pose2d(Units.feetToMeters(39.008), Units.feetToMeters(21.929), Rotation2d.fromDegrees(40))
             ),
             Units.feetToMeters(11), Units.feetToMeters(8), true
@@ -39,7 +39,7 @@ public class TwoBallStealAuto extends SequentialCommandGroup {
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(39.008), Units.feetToMeters(21.929), Rotation2d.fromDegrees(40)),
+                new Pose2d(Units.feetToMeters(39), Units.feetToMeters(21), Rotation2d.fromDegrees(40)),
                 new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(21.929), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(9), Units.feetToMeters(7), true

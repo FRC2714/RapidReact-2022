@@ -28,7 +28,7 @@ public class SideShootAuto extends SequentialCommandGroup {
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(39.351), Units.feetToMeters(21.330), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(39), Units.feetToMeters(21), Rotation2d.fromDegrees(0.00)),
                 new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(21.330), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(9), Units.feetToMeters(7), true

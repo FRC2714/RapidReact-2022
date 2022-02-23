@@ -15,23 +15,37 @@ public class Normalauto extends SequentialCommandGroup {
     public Normalauto(Drivetrain drivetrain){
         new Rotation2d();
         new Rotation2d();
-        CustomRamseteCommand testSpline =
+        CustomRamseteCommand splinetofirstball =
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(29.24), Units.feetToMeters(20.04), Rotation2d.fromDegrees(0.00)),
-                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(22.85), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(28.75), Units.feetToMeters(19.26), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(38.07), Units.feetToMeters(20.28), Rotation2d.fromDegrees(0.00))
             ),
-            Units.feetToMeters(10), Units.feetToMeters(10), true
+            Units.feetToMeters(10), Units.feetToMeters(10), false
         );
-                addCommands(
-                    sequence(
-                       // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //was 2300
-                    ),
-                    deadline(
-                        new InstantCommand(() -> drivetrain.resetOdometry(testSpline.getInitialPose())),
-                        testSpline.andThen(() -> drivetrain.tankDriveVolts(0,0))
-                    )
-                );
+        CustomRamseteCommand splinetosecondball =
+        RamseteGenerator.getRamseteCommand(
+        drivetrain,
+        List.of(
+            new Pose2d(Units.feetToMeters(38.1), Units.feetToMeters(19.3), Rotation2d.fromDegrees(0.00)),
+            new Pose2d(Units.feetToMeters(29), Units.feetToMeters(25.63), Rotation2d.fromDegrees(0.00))
+        ),
+        Units.feetToMeters(10), Units.feetToMeters(10), false
+    );
+            addCommands(
+                sequence(
+                // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
+                 new InstantCommand(() -> drivetrain.resetOdometry(splinetofirstball.getInitialPose())),
+                     deadline(
+                         splinetofirstball
+                        //(code for intaking the ball) AutoIntake(shooter,intake, AutoIntake.IntakeType.INTAKE)
+                             ),
+                             deadline(
+                        // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
+                        splinetosecondball.andThen(() -> drivetrain.tankDriveVolts(0,0))
+                             )
+        )
+    );
     }
 }
