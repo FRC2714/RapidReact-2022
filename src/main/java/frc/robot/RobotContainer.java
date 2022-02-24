@@ -9,9 +9,11 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.Shot.IndexType;
-import frc.robot.commands.Intake.IntakeCommand;
-import frc.robot.commands.Intake.IntakeCommand.IntakeType;
+import frc.robot.commands.intake.IntakeCommand;
+import frc.robot.commands.intake.IntakeCommand.IntakeType;
 import frc.robot.commands.auto.Normalauto;
+import frc.robot.commands.auto.SideShootAuto;
+import frc.robot.commands.auto.TwoBallStealAuto;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.shooter.TeleOpShooter;
@@ -95,7 +97,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getNormalauto() {
-    return new Normalauto(drivetrain);
+    return new Normalauto(drivetrain, intake);
+}
+
+public Command getTwoBallAuto() {
+  return new TwoBallStealAuto(drivetrain, limelight, intake); 
+}
+
+public Command getSideShootAuto(){
+  return new SideShootAuto(drivetrain, limelight, intake);
 }
 
 public Command getNothingAuto(){

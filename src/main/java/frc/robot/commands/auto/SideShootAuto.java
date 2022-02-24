@@ -5,6 +5,7 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.drivetrain.AlignToTarget;
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class SideShootAuto extends SequentialCommandGroup {
 
-    public SideShootAuto(Drivetrain drivetrain){
+    public SideShootAuto(Drivetrain drivetrain, Limelight limelight){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand goToBall =
@@ -38,10 +39,12 @@ public class SideShootAuto extends SequentialCommandGroup {
                        // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                        new InstantCommand(() -> drivetrain.resetOdometry(goToBall.getInitialPose())),
                         deadline(
-                            goToBall
+                            goToBall,
                            //(code for intaking the ball) AutoIntake(shooter,intake, AutoIntake.IntakeType.INTAKE)
+                           new AlignToTarget(drivetrain, limelight, true)
                         ),
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
+                        new AlignToTarget(drivetrain, limelight, false),
                         parktoLine.andThen(() -> drivetrain.tankDriveVolts(0,0))
                     )
 
