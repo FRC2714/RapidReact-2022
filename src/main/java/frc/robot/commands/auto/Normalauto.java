@@ -5,6 +5,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import frc.robot.commands.intake.IntakeCommand;
+import frc.robot.commands.intake.IntakeCommand.IntakeType;
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 
@@ -12,7 +14,7 @@ import java.util.List;
 
 public class Normalauto extends SequentialCommandGroup {
 
-    public Normalauto(Drivetrain drivetrain){
+    public Normalauto(Drivetrain drivetrain, Intake intake){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand splinetofirstball =
@@ -38,8 +40,8 @@ public class Normalauto extends SequentialCommandGroup {
                 // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                  new InstantCommand(() -> drivetrain.resetOdometry(splinetofirstball.getInitialPose())),
                      deadline(
-                         splinetofirstball
-                        //(code for intaking the ball) AutoIntake(shooter,intake, AutoIntake.IntakeType.INTAKE)
+                         splinetofirstball,
+                         new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE)
                              ),
                              deadline(
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //

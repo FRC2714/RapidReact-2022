@@ -6,6 +6,8 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.drivetrain.AlignToTarget;
+import frc.robot.commands.intake.IntakeCommand;
+import frc.robot.commands.intake.IntakeCommand.IntakeType;
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 
@@ -13,7 +15,7 @@ import java.util.List;
 
 public class TwoBallStealAuto extends SequentialCommandGroup {
 
-    public TwoBallStealAuto(Drivetrain drivetrain, Limelight limelight){
+    public TwoBallStealAuto(Drivetrain drivetrain, Limelight limelight, Intake intake){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand goTofirstBall =
@@ -50,14 +52,14 @@ public class TwoBallStealAuto extends SequentialCommandGroup {
                        new InstantCommand(() -> drivetrain.resetOdometry(goTofirstBall.getInitialPose())),
                         deadline(
                             goTofirstBall,
-                            //(code for intaking the ball) AutoIntake(shooter,intake, AutoIntake.IntakeType.INTAKE)
+                            new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
                             // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                             new AlignToTarget(drivetrain, limelight, true)
                         ),
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                         deadline(
                             goTosecondBall,
-                            //(code for intaking the ball) AutoIntake(shooter,intake, AutoIntake.IntakeType.INTAKE)
+                            new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
                             // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                             new AlignToTarget(drivetrain, limelight, false)
                         ),
