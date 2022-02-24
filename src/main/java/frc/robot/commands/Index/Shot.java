@@ -37,14 +37,20 @@ public class Shot extends CommandBase {
                 }
                 break;
             case SINGLESHOT:
-                if(shooter.atSetpoint()){
+                if(index.ballStored && shooter.atSetpoint()){
                     Index.setIndexState(Index.IndexState.SHOOTING);
                 }
-                else{
+                else if(!shooter.atSetpoint()){
                     System.out.println("Not at velocity");
+                }
+                else while(!index.ballStored){
+                    serializer.serializeBalls();
+                    Index.setIndexState(Index.IndexState.LOADING);
+                    index.isStored();
                 }
             case DEFAULT:
               Index.setIndexState(Index.IndexState.DEFAULT);
+              serializer.disable();
         }
     }
 
@@ -58,7 +64,6 @@ public class Shot extends CommandBase {
 
     public enum IndexType{
         LOADING,
-        MULTISHOT,
         SINGLESHOT,
         DEFAULT
     }

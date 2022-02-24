@@ -7,10 +7,13 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.auto.Normalauto;
+import frc.robot.commands.climber.MoveClimber;
+import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -32,6 +35,8 @@ public class RobotContainer {
   private final Index index = new Index(); 
   private final Intake intake = new Intake(); 
   private final Climber climber = new Climber(); 
+  private final Serializer serializer = new Serializer();
+  
 
   private static Joystick driverStick = new Joystick(0);
   private static Joystick operatorStick = new Joystick(1);
@@ -66,11 +71,22 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    //Intake and extake 
     operatorAButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE));
     operatorBButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE));
 
+    //Starting and Stoping the Shooter
     operatorLeftShoulder.whenPressed(new TeleOpShooter(shooter));
-    operatorRightShoulder.whenPressed(new TeleOpShooter())
+    operatorRightShoulder.whenPressed(new InstantCommand(() -> shooter.disable()));
+
+    //Shot
+    operatorUnrestrictedShooting.whenPressed(new Shot(shooter, intake, index, serializer, IndexType.SINGLESHOT));
+
+    //Extend and Contract Climber
+    operatorXButton.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
+    operatorYButton.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+
+    //AlignToTarget added here when complete
   }
 
   /**
