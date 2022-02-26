@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SideShootAuto extends SequentialCommandGroup {
 
-    public SideShootAuto(Drivetrain drivetrain, Limelight limelight){
+    public SideShootAuto(Drivetrain drivetrain){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand goToBall =

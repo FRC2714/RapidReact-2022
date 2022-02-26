@@ -14,7 +14,7 @@ import java.util.List;
 
 public class Normalauto extends SequentialCommandGroup {
 
-    public Normalauto(Drivetrain drivetrain, Intake intake){
+    public Normalauto(Drivetrain drivetrain){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand splinetofirstball =
@@ -40,8 +40,8 @@ public class Normalauto extends SequentialCommandGroup {
                 // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                  new InstantCommand(() -> drivetrain.resetOdometry(splinetofirstball.getInitialPose())),
                      deadline(
-                         splinetofirstball,
-                         new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE)
+                         splinetofirstball
+                         //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE)
                              ),
                              deadline(
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //

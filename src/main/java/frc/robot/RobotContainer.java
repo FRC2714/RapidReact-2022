@@ -97,15 +97,15 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getNormalauto() {
-    return new Normalauto(drivetrain, intake);
+    return new Normalauto(drivetrain);
 }
 
 public Command getTwoBallAuto() {
-  return new TwoBallStealAuto(drivetrain, limelight); 
+  return new TwoBallStealAuto(drivetrain); 
 }
 
 public Command getSideShootAuto(){
-  return new SideShootAuto(drivetrain, limelight);
+  return new SideShootAuto(drivetrain);
 }
 
 
