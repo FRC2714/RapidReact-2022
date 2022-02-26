@@ -7,8 +7,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.drivetrain.AlignToTarget;
-import frc.robot.commands.intake.IntakeCommand;
-import frc.robot.commands.intake.IntakeCommand.IntakeType;
+import frc.robot.commands.Intake.IntakeCommand;
+import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 
