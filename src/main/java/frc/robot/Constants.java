@@ -57,10 +57,9 @@ public final class Constants {
     }
 
     public static final class IntakeConstants {
-        public static int kLIntakeMotorPort = 7;
-        public static int kRIntakeMotorPort = 8;
-        public static int kLSerializerPort = 9;
-        public static int kRSerializerPort = 10;
+        public static int kIntakeMotorPort = 15;
+        public static int kLSerializerPort = 7;
+        public static int kRSerializerPort = 8;
 
         public static double kIntakePower = 1; // was 1.0
         public static double kSerializerPower = 0.5; //was 0.6
@@ -70,16 +69,16 @@ public final class Constants {
         public static double kSparkMaxP = 0.0006;
         public static double kSparkMaxFeedforward = 0.000195; // .00022
 
-        public static int kLeftMotorPort = 11;
-        public static int kRightMotorPort = 12;
+        public static int kLeftMotorPort = 9;
+        public static int kRightMotorPort = 10;
 
         public static double kVelocityTolerance = 115;
     }
 
     public static final class IndexConstants {
 
-        public static int kiTowerPort = 10;
-        public static int koTowerPort = 17;
+        public static int kiTowerPort = 12;
+        public static int koTowerPort = 11;
     }
 
     public static final class CameraConstants {
