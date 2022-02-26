@@ -13,7 +13,7 @@ import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.auto.Normalauto;
 import frc.robot.commands.auto.SideShootAuto;
-import frc.robot.commands.auto.TwoBallStealAuto;
+import frc.robot.commands.auto.TwoBallRT;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.shooter.TeleOpShooter;
@@ -101,7 +101,7 @@ public class RobotContainer {
 }
 
 public Command getTwoBallAuto() {
-  return new TwoBallStealAuto(drivetrain); 
+  return new TwoBallRT(drivetrain); 
 }
 
 public Command getSideShootAuto(){

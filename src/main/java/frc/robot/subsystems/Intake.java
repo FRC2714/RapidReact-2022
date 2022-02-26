@@ -24,7 +24,7 @@ public class Intake extends SubsystemBase {
         setIntakePower(-IntakeConstants.kIntakePower);
     }
 
-    public void disbale() {
+    public void disable() {
         setIntakePower(0);
     }
 
