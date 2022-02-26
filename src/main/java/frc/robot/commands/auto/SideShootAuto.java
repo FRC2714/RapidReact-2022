@@ -16,7 +16,7 @@ import java.util.List;
 
 public class SideShootAuto extends SequentialCommandGroup {
 
-    public SideShootAuto(Drivetrain drivetrain, Limelight limelight, Intake intake){
+    public SideShootAuto(Drivetrain drivetrain, Limelight limelight){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand goToBall =
@@ -33,7 +33,7 @@ public class SideShootAuto extends SequentialCommandGroup {
             drivetrain,
             List.of(
                 new Pose2d(Units.feetToMeters(39), Units.feetToMeters(21), Rotation2d.fromDegrees(0.00)),
-                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(21.330), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(22.416), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(9), Units.feetToMeters(7), true
         );
@@ -43,11 +43,11 @@ public class SideShootAuto extends SequentialCommandGroup {
                        new InstantCommand(() -> drivetrain.resetOdometry(goToBall.getInitialPose())),
                         deadline(
                             goToBall,
-                           new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
+                           //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
                            new AlignToTarget(drivetrain, limelight, true)
                         ),
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
-                        new AlignToTarget(drivetrain, limelight, false),
+                        //new AlignToTarget(drivetrain, limelight, false),
                         parktoLine.andThen(() -> drivetrain.tankDriveVolts(0,0))
                     )
 

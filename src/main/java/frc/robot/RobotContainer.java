@@ -101,12 +101,13 @@ public class RobotContainer {
 }
 
 public Command getTwoBallAuto() {
-  return new TwoBallStealAuto(drivetrain, limelight, intake); 
+  return new TwoBallStealAuto(drivetrain, limelight); 
 }
 
 public Command getSideShootAuto(){
-  return new SideShootAuto(drivetrain, limelight, intake);
+  return new SideShootAuto(drivetrain, limelight);
 }
+
 
 public Command getNothingAuto(){
   return new InstantCommand(() -> drivetrain.tankDriveVolts(0,0));

@@ -51,17 +51,17 @@ public class TwoBallStealAuto extends SequentialCommandGroup {
                        // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                        new InstantCommand(() -> drivetrain.resetOdometry(goTofirstBall.getInitialPose())),
                         deadline(
-                            goTofirstBall,
-                            new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
+                            goTofirstBall
+                            //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
                             // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
-                            new AlignToTarget(drivetrain, limelight, true)
+                            //new AlignToTarget(drivetrain, limelight, true)
                         ),
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                         deadline(
-                            goTosecondBall,
-                            new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
+                            goTosecondBall
+                            //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
                             // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
-                            new AlignToTarget(drivetrain, limelight, false)
+                            //new AlignToTarget(drivetrain, limelight, false)
                         ),
                         parktoLine.andThen(() -> drivetrain.tankDriveVolts(0,0))
                     )
