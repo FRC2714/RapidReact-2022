@@ -56,7 +56,7 @@ public class Shot extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        intake.disbale();
+        intake.disable();
         shooter.disable();
         index.disable();
         Index.setIndexState(Index.IndexState.DEFAULT);

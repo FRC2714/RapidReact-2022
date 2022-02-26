@@ -42,9 +42,9 @@ public class SideShootAuto extends SequentialCommandGroup {
                        // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                        new InstantCommand(() -> drivetrain.resetOdometry(goToBall.getInitialPose())),
                         deadline(
-                            goToBall,
+                            goToBall
                            //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE),
-                           new AlignToTarget(drivetrain, limelight, true)
+                           //new AlignToTarget(drivetrain, limelight, true)
                         ),
                         // hopefully the code for shooter here new AutomaticShoot(shooter, conveyor, intake, 2620, false, 3), //
                         //new AlignToTarget(drivetrain, limelight, false),

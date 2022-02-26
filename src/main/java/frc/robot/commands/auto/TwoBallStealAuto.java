@@ -15,7 +15,7 @@ import java.util.List;
 
 public class TwoBallStealAuto extends SequentialCommandGroup {
 
-    public TwoBallStealAuto(Drivetrain drivetrain, Limelight limelight, Intake intake){
+    public TwoBallStealAuto(Drivetrain drivetrain, Limelight limelight){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand goTofirstBall =
@@ -42,7 +42,7 @@ public class TwoBallStealAuto extends SequentialCommandGroup {
             drivetrain,
             List.of(
                 new Pose2d(Units.feetToMeters(39), Units.feetToMeters(21), Rotation2d.fromDegrees(40)),
-                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(21.929), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(22.3), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(9), Units.feetToMeters(7), true
         );

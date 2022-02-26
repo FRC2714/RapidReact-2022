@@ -74,8 +74,8 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Intake and extake 
-    operatorAButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE));
-    operatorBButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE));
+    operatorAButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
+    operatorBButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
 
     //Starting and Stoping the Shooter
     operatorLeftShoulder.whenPressed(new TeleOpShooter(shooter));
