@@ -13,17 +13,18 @@ import frc.robot.utils.*;
 
 import java.util.List;
 
-public class TwoBallStealAuto extends SequentialCommandGroup {
 
-    public TwoBallStealAuto(Drivetrain drivetrain){
+public class TwoBallBT extends SequentialCommandGroup {
+
+    public TwoBallBT(Drivetrain drivetrain){
         new Rotation2d();
         new Rotation2d();
         CustomRamseteCommand goTofirstBall =
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(29.369), Units.feetToMeters(19.303), Rotation2d.fromDegrees(0)),
-                new Pose2d(Units.feetToMeters(31.107), Units.feetToMeters(24.797), Rotation2d.fromDegrees(45))
+                new Pose2d(Units.feetToMeters(21.744), Units.feetToMeters(16.139), Rotation2d.fromDegrees(0)),
+                new Pose2d(Units.feetToMeters(14.236), Units.feetToMeters(20.121), Rotation2d.fromDegrees(0))
             ),
             Units.feetToMeters(10), Units.feetToMeters(7), false
         );
@@ -31,18 +32,18 @@ public class TwoBallStealAuto extends SequentialCommandGroup {
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(31), Units.feetToMeters(24), Rotation2d.fromDegrees(45)),
-                new Pose2d(Units.feetToMeters(39.008), Units.feetToMeters(21.929), Rotation2d.fromDegrees(40))
+                new Pose2d(Units.feetToMeters(14.235), Units.feetToMeters(20.119), Rotation2d.fromDegrees(0)),
+                new Pose2d(Units.feetToMeters(14.787), Units.feetToMeters(6.128), Rotation2d.fromDegrees(0))
             ),
-            Units.feetToMeters(11), Units.feetToMeters(8), true
+            Units.feetToMeters(11), Units.feetToMeters(8), false
         );
 
         CustomRamseteCommand parktoLine =
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(39), Units.feetToMeters(21), Rotation2d.fromDegrees(40)),
-                new Pose2d(Units.feetToMeters(44.99), Units.feetToMeters(22.3), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(14.787), Units.feetToMeters(6.128), Rotation2d.fromDegrees(0)),
+                new Pose2d(Units.feetToMeters(3.842), Units.feetToMeters(6.403), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(9), Units.feetToMeters(7), true
         );
