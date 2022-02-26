@@ -7,17 +7,13 @@ import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase {
 
-    private CANSparkMax lIntakeMotor;
-    private CANSparkMax rIntakeMotor;
+    private CANSparkMax intakeMotor;
 
     public Intake() {
-        lIntakeMotor = new CANSparkMax(IntakeConstants.kLIntakeMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-        rIntakeMotor = new CANSparkMax(IntakeConstants.kRIntakeMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
+        intakeMotor = new CANSparkMax(IntakeConstants.kLIntakeMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        lIntakeMotor.setSmartCurrentLimit(40);
-        rIntakeMotor.setSmartCurrentLimit(40);
+        intakeMotor.setSmartCurrentLimit(40);
 
-        rIntakeMotor.setInverted(true);
     }
 
     public void intakeBalls() {
@@ -33,8 +29,7 @@ public class Intake extends SubsystemBase {
     }
 
     public void setIntakePower(double power){
-        lIntakeMotor.set(power);
-        rIntakeMotor.set(power);
+        intakeMotor.set(power);
 
     }
 }
