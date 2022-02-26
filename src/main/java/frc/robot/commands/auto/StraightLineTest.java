@@ -22,7 +22,7 @@ public class StraightLineTest extends SequentialCommandGroup {
                 new Pose2d(Units.feetToMeters(39.893), Units.feetToMeters(24.31), Rotation2d.fromDegrees(0.00)),
                 new Pose2d(Units.feetToMeters(31.611), Units.feetToMeters(22.345), Rotation2d.fromDegrees(0.00))
             ),
-            Units.feetToMeters(5), Units.feetToMeters(5), false
+            Units.feetToMeters(3), Units.feetToMeters(3), false
         );
             addCommands(
                 sequence(

@@ -48,7 +48,7 @@ public final class Constants {
         public static int[] kRightEncoderPorts = new int[]{2, 3};
 
         public static boolean kLeftEncoderReversed = false;
-        public static boolean kRightEncoderReversed = false;
+        public static boolean kRightEncoderReversed = true;
 
         public static boolean kGyroReversed = true;
 
