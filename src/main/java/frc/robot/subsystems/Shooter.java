@@ -52,7 +52,7 @@ public class Shooter extends SubsystemBase {
   }
   
   public void populateVelocityMap(){
-    //TODO find this stuff
+
   }
 
   public void setShooterPower(double power){

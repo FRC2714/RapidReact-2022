@@ -42,9 +42,9 @@ public class RobotContainer {
   private static Joystick driverStick = new Joystick(0);
   private static Joystick operatorStick = new Joystick(1);
 
-  private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
-  private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
-  private JoystickButton driverLeftShoulder = new JoystickButton(driverStick, 5);
+  //private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
+  //private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
+  //private JoystickButton driverLeftShoulder = new JoystickButton(driverStick, 5);
 
   private JoystickButton operatorAButton = new JoystickButton(operatorStick, 1);
   private JoystickButton operatorBButton = new JoystickButton(operatorStick, 2);
@@ -53,7 +53,7 @@ public class RobotContainer {
   private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
   private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
   private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
-  private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
+  //private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Configure the button bindings
