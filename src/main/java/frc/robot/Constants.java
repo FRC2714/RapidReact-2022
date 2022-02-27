@@ -82,12 +82,12 @@ public final class Constants {
     }
 
     public static final class CameraConstants {
-        public static double kCameraHeight = Units.inchesToMeters(27); // TODO: update this
+        public static double kCameraHeight = Units.inchesToMeters(27); 
         public static double kCameraMountingAngle = 29; // degrees
     }
 
     public static final class FieldConstants {
-        public static double kGoalHeight = Units.inchesToMeters(98.25); // TODO: check this
+        public static double kGoalHeight = Units.inchesToMeters(98.25); 
     }
 
     public static final class ClimberConstants {
