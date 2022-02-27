@@ -38,8 +38,7 @@ public class Robot extends TimedRobot {
     autoChooser.setDefaultOption("Normal Auton", robotContainer.getNormalauto());
     autoChooser.addOption("Do Nothing", robotContainer.getNothingAuto());
     autoChooser.addOption("Straight Line Test", robotContainer.getStraightLineAuto());
-    autoChooser.addOption("Two Ball Steal Auton", robotContainer.getTwoBallAuto());
-    autoChooser.addOption("Shoot and Grab 1 other ball to Shoot", robotContainer.getSideShootAuto());
+  
     
 
     SmartDashboard.putData("Auto Picker", autoChooser);

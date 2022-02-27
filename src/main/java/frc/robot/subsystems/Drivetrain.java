@@ -298,7 +298,7 @@ public class Drivetrain extends SubsystemBase {
                 rightDist);
 
         internalOdometry.update(Rotation2d.fromDegrees(getHeading()),
-                (leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius,
+                (-leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius,
                 (rightNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
 
         live_dashboard.getEntry("robotX").setDouble(Units.metersToFeet(getPose().getTranslation().getX()));
@@ -314,6 +314,10 @@ public class Drivetrain extends SubsystemBase {
 
         SmartDashboard.putNumber("Left Encoder = ", leftEncoder.getDistance());
         SmartDashboard.putNumber("Right Encoder = ", rightEncoder.getDistance());
+
+        SmartDashboard.putNumber("NEO left Encoder", (leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
+        SmartDashboard.putNumber("NEO right encoder", (rightNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
+
     }
 
 }

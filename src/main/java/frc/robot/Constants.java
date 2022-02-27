@@ -18,7 +18,7 @@ public final class Constants {
         public static double kMaxAngularSpeed = 2 * Math.PI; // one rotation per second
         public static double kTrackWidth = 0.55; // meters
         public static double kWheelRadius = 0.0762; // meters
-        public static double kShaftEncoderResolution = 8192; // counts per revolution bore encoder
+        public static double kShaftEncoderResolution = 2048; // PPR
         public static double positionChangePerRotation = 8.73; // Motor rotation per shaft rotation
         public static double kMaxVelocity = 3; // feet per second
         public static double kMaxAcceleration = 1; // Max Accel fet per second squared
