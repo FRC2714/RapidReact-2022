@@ -8,13 +8,15 @@ public class TeleOpShooter extends CommandBase {
 
     private Shooter shooter;
     private double rpm;
+    private ShooterType shooterSpeed;
 
-    public TeleOpShooter(Shooter shooter, double rpm){
+    public TeleOpShooter(Shooter shooter, double rpm, ShooterType shooterSpeed){
         this.shooter = shooter;
         this.rpm = rpm;
+        this.shooterSpeed = shooterSpeed; 
     }
 
-    public TeleOpShooter(Shooter shooter){
+    public TeleOpShooter(Shooter shooter, ShooterType close){
         this.shooter = shooter;
     }
 
@@ -25,24 +27,41 @@ public class TeleOpShooter extends CommandBase {
 
     @Override
     public void execute() {
-        shooter.setShooterPower(0.5);
-        SmartDashboard.putNumber("Current Output 1", shooter.shooterMotor1.getOutputCurrent());
-        SmartDashboard.putNumber("Current Output 2", shooter.shooterMotor2.getOutputCurrent());
-        System.out.println("Shooter Enabled");
+        switch(shooterSpeed){
+            case CLOSE:
+                shooter.closeShot();
+                break;
+            case MID:
+                shooter.midShot();
+                break;
+            case FAR:
+                shooter.longShot();
+                break;
+            case DISABLE:
+                shooter.disable();
+                break;
+        }
+        
     }
 
     @Override
     public void end(boolean interrupted) {
         shooter.setShooterPower(0);
+        shooter.disable();
         SmartDashboard.putNumber("Current Output 1", 0);
         SmartDashboard.putNumber("Current Output 2", 0);
-        System.out.println("Shooter Disabled");
     }
 
     @Override
     public boolean isFinished() {
         return Math.abs(rpm - shooter.getVelocity()) < (.05 *rpm);
     }
-
+    
+    public enum ShooterType{
+        CLOSE,
+        MID,
+        FAR,
+        DISABLE
+    }
 
 }
