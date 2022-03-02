@@ -10,18 +10,12 @@ public class TeleOpShooter extends CommandBase {
     private double rpm;
     private ShooterType shooterSpeed;
 
-    public TeleOpShooter(Shooter shooter, double rpm, ShooterType shooterSpeed){
-        this.shooter = shooter;
-        this.rpm = rpm;
-        this.shooterSpeed = shooterSpeed; 
-    }
-
     public TeleOpShooter(Shooter shooter, ShooterType shooterSpeed){
         this.shooter = shooter;
         this.shooterSpeed = shooterSpeed;
 
     }
-
+    
     @Override
     public void initialize() {
 

@@ -223,13 +223,13 @@ public class CustomRamseteCommand extends CommandBase {
                 " | Final Heading " + drivetrain.getPose().getRotation().getDegrees());
     }
 
-    @Override
-    public boolean isFinished() {
-        if (drivetrain.isEncoderError())
-            System.out.println("ERROR - CHECK IF ENCODER UNPLUGGED");
+    // @Override
+    // public boolean isFinished() {
+    //     if (drivetrain.isEncoderError())
+    //         System.out.println("ERROR - CHECK IF ENCODER UNPLUGGED");
 
-        return m_timer.advanceIfElapsed(m_trajectory.getTotalTimeSeconds()) || drivetrain.isEncoderError();
-    }
+    //     return m_timer.advanceIfElapsed(m_trajectory.getTotalTimeSeconds()) || drivetrain.isEncoderError();
+    // }
 
     public Pose2d getInitialPose() {
         return m_trajectory.getInitialPose();
