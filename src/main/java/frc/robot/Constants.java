@@ -61,7 +61,7 @@ public final class Constants {
         public static int kLSerializerPort = 7;
         public static int kRSerializerPort = 8;
 
-        public static double kIntakePower = 1; // was 1.0
+        public static double kIntakePower = 0.6; // was 1.0
         public static double kSerializerPower = 0.5; //was 0.6
     }
 

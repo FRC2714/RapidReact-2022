@@ -73,15 +73,22 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //Intake and extake 
-    operatorAButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
-    operatorBButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+    //operatorAButton.whenPressed(new IntakeCommand(intake, IntakeType.SpinIntake, serializer));
 
-    //Starting and Stoping the Shooter
-    operatorLeftShoulder.whenPressed(new TeleOpShooter(shooter));
-    operatorRightShoulder.whenPressed(new InstantCommand(() -> shooter.disable()));
+    operatorBButton
+      .whileHeld(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
+
+    operatorAButton.whileHeld(
+      new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+     // .whenReleased(new IntakeCommand(intake, IntakeType.DISABLE, serializer));
+   
+   //Starting and Stoping the Shooter
+    operatorLeftShoulder.whileHeld(new TeleOpShooter(shooter));
+    operatorRightShoulder.whileHeld(new Shot(shooter, intake, index));
+    //operatorRightShoulder.whenPressed(new InstantCommand(() -> shooter.disable()));
 
     //Shot
-    operatorUnrestrictedShooting.whenPressed(new Shot(shooter, intake, index, serializer, IndexType.SINGLESHOT));
+    operatorUnrestrictedShooting.whenPressed(new Shot(shooter, intake, index));
 
     //Extend and Contract Climber
     operatorXButton.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
@@ -89,6 +96,7 @@ public class RobotContainer {
 
     //AlignToTarget added here when complete
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.

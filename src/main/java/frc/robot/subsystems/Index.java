@@ -27,15 +27,15 @@ public class Index {
 
     public IndexState indexState = IndexState.DEFAULT;
 
-    public Index(Boolean shooterAtVelocity) {
+    public Index() {
         innerTower = new CANSparkMax(IndexConstants.kiTowerPort, CANSparkMaxLowLevel.MotorType.kBrushless);
         outerTower = new CANSparkMax(IndexConstants.koTowerPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
         innerTower.setSmartCurrentLimit(30);
         outerTower.setSmartCurrentLimit(30);
 
-        innerTower.setInverted(true);
-        outerTower.setInverted(false);
+        innerTower.setInverted(false);
+        outerTower.setInverted(true);
 
         innerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
         outerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
@@ -43,9 +43,6 @@ public class Index {
         ballStored = false;
 
         indexBeam = new ToggledBreakBeam(new DigitalInput(4));
-    }
-
-    public Index() {
     }
 
     public static void setIndexState(IndexState indexState) {
@@ -86,8 +83,14 @@ public class Index {
         return indexState;
     }
 
+    public void setBothTowerPower(double input){
+        innerTower.set(input);
+        outerTower.set(input);
+    }
+
     public void disable() {
         indexState = IndexState.DEFAULT;
+        setBothTowerPower(0);
     }
 
     public void isStored(){

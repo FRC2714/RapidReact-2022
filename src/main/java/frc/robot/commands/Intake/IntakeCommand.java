@@ -8,35 +8,57 @@ import frc.robot.subsystems.Serializer;
 public class IntakeCommand extends CommandBase{
 
     private Intake intake; 
-    private IntakeType intakeType;
     private Serializer serializer;
+    private IntakeType intakeType;
+
 
     
     public IntakeCommand(Intake intake, IntakeType intakeType, Serializer serializer){
         this.intake = intake;
         this.intakeType = intakeType;
         this.serializer = serializer;
-
-   
     }
 
 
     @Override 
-
-    public void initialize (){
+    public void execute (){
         switch(intakeType){
             case EXTAKE:
-            intake.extakeBalls(); 
+            intake.extakeBalls();
             serializer.unCerealBalls();
             Index.setIndexState(Index.IndexState.EXTAKING); 
+            System.out.println("Removing Balls");
             break;
-            
+
             case INTAKE:
             intake.intakeBalls();  
             serializer.serializeBalls();          
             Index.setIndexState(Index.IndexState.INTAKING);
+            System.out.println("Collecting Balls");
             break;
+
+            case DISABLE: 
+            intake.disable();
+            serializer.disable();
+            Index.setIndexState(Index.IndexState.DEFAULT);
+            System.out.println("Disabled");
+            break; 
         }
+
+        //intake.intakeBalls();
+        System.out.println("Set motor to 0.5");
+        System.out.println("Get output - " + intake.intakeMotor.getAppliedOutput());
+    }
+
+
+    @Override
+    public void end(boolean interrupted) {
+        // TODO Auto-generated method stub
+        super.end(interrupted);
+        System.out.println("End()");
+
+        intake.disable();
+        serializer.disable();
     }
 
     
@@ -44,7 +66,9 @@ public class IntakeCommand extends CommandBase{
 
     public enum IntakeType{
         EXTAKE,
-        INTAKE
+        INTAKE,
+        DISABLE,
+        SpinIntake
     }
 
 }

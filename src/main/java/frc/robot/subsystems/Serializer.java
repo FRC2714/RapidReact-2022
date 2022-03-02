@@ -14,7 +14,7 @@ public class Serializer extends SubsystemBase{
         lSerializer = new CANSparkMax(IntakeConstants.kLSerializerPort, CANSparkMaxLowLevel.MotorType.kBrushless);
         rSerializer = new CANSparkMax(IntakeConstants.kRSerializerPort, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-        lSerializer.setSmartCurrentLimit(40);
+        lSerializer.setSmartCurrentLimit(35);
 
         rSerializer.setInverted(true);
     }
@@ -25,11 +25,11 @@ public class Serializer extends SubsystemBase{
     }
 
     public void serializeBalls() {
-        setSerializerPower(IntakeConstants.kSerializerPower);
+        setSerializerPower(-IntakeConstants.kSerializerPower);
     }
 
     public void unCerealBalls() {
-        setSerializerPower(-IntakeConstants.kSerializerPower);
+        setSerializerPower(IntakeConstants.kSerializerPower);
     }
     public void disable() {
         setSerializerPower(0);

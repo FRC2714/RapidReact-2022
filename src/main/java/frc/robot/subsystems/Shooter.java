@@ -35,14 +35,12 @@ public class Shooter extends SubsystemBase {
     shooterMotor1 = new CANSparkMax(ShooterConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     shooterMotor2 = new CANSparkMax(ShooterConstants.kRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     
-    shooterMotor1.setSmartCurrentLimit(60);
-    shooterMotor2.setSmartCurrentLimit(60);
+    shooterMotor1.setSmartCurrentLimit(30);
+    shooterMotor2.setSmartCurrentLimit(30);
 
     shooterEncoder = shooterMotor1.getEncoder();
 
-    shooterMotor2.setInverted(true);
-
-    shooterMotor2.follow(shooterMotor1);
+    shooterMotor2.follow(shooterMotor1, true);
 
     shooterPID = shooterMotor1.getPIDController();
     shooterPID.setFF(ShooterConstants.kSparkMaxFeedforward);
@@ -62,7 +60,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public void setShooterPower(double power){
-    shooterMotor1.set(power);
+    shooterMotor1.set(-power);
 }
 
   public void setTargetRpm(double targetRPM) {
@@ -85,7 +83,6 @@ public class Shooter extends SubsystemBase {
 public boolean atSetpoint() {
     return Math.abs(targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
 }
-
 
   public void disable(){
     shooterMotor1.set(0);
