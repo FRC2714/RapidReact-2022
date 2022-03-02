@@ -23,7 +23,16 @@ public class BackShoot extends SequentialCommandGroup {
                 new Pose2d(Units.feetToMeters(29.992), Units.feetToMeters(19.027), Rotation2d.fromDegrees(0.00)),
                 new Pose2d(Units.feetToMeters(36.507), Units.feetToMeters(18.992), Rotation2d.fromDegrees(0.00))
             ),
-            Units.feetToMeters(3), Units.feetToMeters(3), true
+            Units.feetToMeters(5), Units.feetToMeters(3), true
+        );
+        CustomRamseteCommand parkToLine =
+            RamseteGenerator.getRamseteCommand(
+            drivetrain,
+            List.of(
+                new Pose2d(Units.feetToMeters(37), Units.feetToMeters(18.882), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(46.203), Units.feetToMeters(18.938), Rotation2d.fromDegrees(0.00))
+            ),
+            Units.feetToMeters(5), Units.feetToMeters(4), true
         );
             addCommands(
                 sequence(
@@ -32,7 +41,10 @@ public class BackShoot extends SequentialCommandGroup {
                          MoveBack,
                          //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE)
                          new Shot(shooter, intake, index)
-                             )
+                        ),
+                 parkToLine.andThen(() -> drivetrain.tankDriveVolts(0,0))
+                                    
+                
         )
     );
     }
