@@ -16,11 +16,13 @@ public class MoveClimber extends CommandBase {
     public void execute(){
         switch(ClimberMotionType){
             case EXTEND:
-            climber.setClimberPower(0.1);
+            climber.setClimberPower(0.5);
             System.out.println("Climbing Up");
+            break; 
             case RETRACT:
-            climber.setClimberPower(-0.1);
+            climber.setClimberPower(-0.5);
             System.out.println("Climbing Down");
+            break;
         }
 
     }

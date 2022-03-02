@@ -20,6 +20,8 @@ public class Climber {
 
         lClimberMotor.setSmartCurrentLimit(30);
 
+
+    
         rClimberMotor.follow(lClimberMotor, true);
 
         climberPID = lClimberMotor.getPIDController();
