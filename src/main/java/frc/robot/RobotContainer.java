@@ -11,6 +11,7 @@ import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
+import frc.robot.commands.auto.BackShoot;
 import frc.robot.commands.auto.Normalauto;
 import frc.robot.commands.auto.StraightLineTest;
 import frc.robot.commands.climber.MoveClimber;
@@ -104,7 +105,14 @@ public class RobotContainer {
    */
   public Command getNormalauto() {
     return new Normalauto(drivetrain);
-}
+  }
+
+  public Command getBackShootAuto(){
+    return new BackShoot(drivetrain, shooter, index, intake);
+  }
+
+  
+
 
 
 public Command getNothingAuto(){

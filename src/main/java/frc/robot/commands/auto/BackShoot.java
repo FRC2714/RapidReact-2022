@@ -20,8 +20,8 @@ public class BackShoot extends SequentialCommandGroup {
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(28.826), Units.feetToMeters(18.646), Rotation2d.fromDegrees(0.00)),
-                new Pose2d(Units.feetToMeters(31.611), Units.feetToMeters(19.382), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(29.992), Units.feetToMeters(19.027), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(36.507), Units.feetToMeters(18.992), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(3), Units.feetToMeters(3), true
         );
