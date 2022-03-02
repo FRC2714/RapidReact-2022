@@ -2,26 +2,24 @@ package frc.robot.subsystems;
 
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
+
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.IntakeConstants;
 
 public class Intake extends SubsystemBase {
 
-    private CANSparkMax intakeMotor;
+    public CANSparkMax intakeMotor;
 
     public Intake() {
-        intakeMotor = new CANSparkMax(IntakeConstants.kIntakeMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-
+        intakeMotor = new CANSparkMax(15, CANSparkMaxLowLevel.MotorType.kBrushless);
         intakeMotor.setSmartCurrentLimit(40);
-
     }
 
     public void intakeBalls() {
-        setIntakePower(IntakeConstants.kIntakePower);
+        setIntakePower(-1);
     }
     
     public void extakeBalls() {
-        setIntakePower(-IntakeConstants.kIntakePower);
+        setIntakePower(1);
     }
 
     public void disable() {
@@ -30,6 +28,5 @@ public class Intake extends SubsystemBase {
 
     public void setIntakePower(double power){
         intakeMotor.set(power);
-
     }
 }

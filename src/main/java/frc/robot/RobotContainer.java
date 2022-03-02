@@ -11,6 +11,7 @@ import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
+import frc.robot.commands.auto.BackShoot;
 import frc.robot.commands.auto.Normalauto;
 import frc.robot.commands.auto.StraightLineTest;
 import frc.robot.commands.climber.MoveClimber;
@@ -52,7 +53,13 @@ public class RobotContainer {
   private JoystickButton operatorRightShoulder = new JoystickButton(operatorStick, 6);
   private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
   private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
-  private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
+  
+  private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
+  private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
+  private JoystickButton driverXButton = new JoystickButton(driverStick, 3);
+  private JoystickButton driverYButton = new JoystickButton(driverStick, 4);
+
+
   //private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -72,23 +79,24 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //Intake and extake 
-    operatorAButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
-    operatorBButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+    //Intake and extake
+    operatorBButton.whileHeld(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
 
-    //Starting and Stoping the Shooter
-    operatorLeftShoulder.whenPressed(new TeleOpShooter(shooter));
-    operatorRightShoulder.whenPressed(new InstantCommand(() -> shooter.disable()));
-
-    //Shot
-    operatorUnrestrictedShooting.whenPressed(new Shot(shooter, intake, index, serializer, IndexType.SINGLESHOT));
+    operatorYButton.whileHeld(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+   
+   //Starting and Stoping the Shooter
+    driverAButton.whileHeld(new TeleOpShooter(shooter));
+   
+   //shot
+    operatorRightShoulder.whileHeld(new Shot(shooter, intake, index));
 
     //Extend and Contract Climber
     operatorXButton.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
-    operatorYButton.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+    operatorAButton.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
 
     //AlignToTarget added here when complete
   }
+
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -97,7 +105,14 @@ public class RobotContainer {
    */
   public Command getNormalauto() {
     return new Normalauto(drivetrain);
-}
+  }
+
+  public Command getBackShootAuto(){
+    return new BackShoot(drivetrain, shooter, index, intake);
+  }
+
+  
+
 
 
 public Command getNothingAuto(){

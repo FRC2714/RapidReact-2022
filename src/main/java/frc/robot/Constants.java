@@ -61,7 +61,7 @@ public final class Constants {
         public static int kLSerializerPort = 7;
         public static int kRSerializerPort = 8;
 
-        public static double kIntakePower = 1; // was 1.0
+        public static double kIntakePower = 0.6; // was 1.0
         public static double kSerializerPower = 0.5; //was 0.6
     }
 
@@ -86,12 +86,12 @@ public final class Constants {
         public static int koTowerPort = 11;
     }
     public static final class CameraConstants {
-        public static double kCameraHeight = Units.inchesToMeters(27); // TODO: update this
+        public static double kCameraHeight = Units.inchesToMeters(27); 
         public static double kCameraMountingAngle = 29; // degrees
     }
 
     public static final class FieldConstants {
-        public static double kGoalHeight = Units.inchesToMeters(98.25); // TODO: check this
+        public static double kGoalHeight = Units.inchesToMeters(98.25); 
     }
 
     public static final class ClimberConstants {
