@@ -85,10 +85,9 @@ public class RobotContainer {
 
     //Starting and Stoping the Shooter
    // operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
-    operatorAButton.whenPressed(new TeleOpShooter(shooter, ShooterType.CLOSE));
-    operatorBButton.whenPressed(new TeleOpShooter(shooter, ShooterType.MID));
-    operatorYButton.whenPressed(new TeleOpShooter(shooter, ShooterType.FAR));
-    operatorXButton.whenPressed(new TeleOpShooter(shooter, ShooterType.DISABLE));
+    operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
+    operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
+    operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
 
 
     //Shot
