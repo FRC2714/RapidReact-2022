@@ -16,8 +16,10 @@ public class TeleOpShooter extends CommandBase {
         this.shooterSpeed = shooterSpeed; 
     }
 
-    public TeleOpShooter(Shooter shooter, ShooterType close){
+    public TeleOpShooter(Shooter shooter, ShooterType shooterSpeed){
         this.shooter = shooter;
+        this.shooterSpeed = shooterSpeed;
+
     }
 
     @Override
