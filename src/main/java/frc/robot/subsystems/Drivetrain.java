@@ -43,8 +43,8 @@ public class Drivetrain extends SubsystemBase {
     );
 
     private final Encoder rightEncoder = new Encoder(
-            DriveConstants.kRightEncoderPorts[0],
-            DriveConstants.kRightEncoderPorts[1],
+            DriveConstants.kRightEncoderPorts[2],
+            DriveConstants.kRightEncoderPorts[3],
             true,
             CounterBase.EncodingType.k4X
     );
