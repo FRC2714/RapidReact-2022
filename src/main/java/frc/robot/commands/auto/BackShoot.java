@@ -25,7 +25,7 @@ public class BackShoot extends SequentialCommandGroup {
             ),
             Units.feetToMeters(5), Units.feetToMeters(3), true
         );
-        CustomRamseteCommand parkToLine =
+       /* CustomRamseteCommand parkToLine =
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
@@ -40,12 +40,13 @@ public class BackShoot extends SequentialCommandGroup {
                  deadline(
                          MoveBack,
                          //new IntakeCommand(intake, IntakeCommand.IntakeType.INTAKE)
-                         new Shot(shooter, intake, index)
+                         //new Shot(shooter, intake, index)
                         ),
                  parkToLine.andThen(() -> drivetrain.tankDriveVolts(0,0))
                                     
                 
         )
     );
+    */
     }
 }
