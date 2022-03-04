@@ -8,9 +8,11 @@ import frc.robot.subsystems.Shooter;
 public class Shot extends CommandBase {
 
     private Index index;
+    private IndexType indexType;
 
-    public Shot(Index index){
+    public Shot(Index index, IndexType indexType){
         this.index = index;
+        this.indexType = indexType;
     }
 
     @Override
@@ -19,12 +21,23 @@ public class Shot extends CommandBase {
 
     @Override
     public void execute() {
-        index.setBothTowerPower(1);
+        switch(indexType){
+            case SHOT:
+            index.setBothTowerPower(1);
+            break;
+            case EXTAKE:
+            index.setBothTowerPower(-1);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
         index.disable();
+    }
+
+    public enum IndexType {
+        SHOT,
+        EXTAKE
     }
 
 }

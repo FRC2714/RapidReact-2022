@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Index.Shot;
+import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.auto.Normalauto;
@@ -90,7 +91,7 @@ public class RobotContainer {
     //Intake and extake 
     operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
     operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
-
+    operatorLeftBumper.whileHeld(new Shot(index, IndexType.EXTAKE));
     //Starting and Stoping the Shooter
    // operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
     operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
@@ -99,7 +100,7 @@ public class RobotContainer {
 
 
     //Shot
-    operatorRightTrigger.whileActiveContinuous(new Shot(index));
+    operatorRightTrigger.whileActiveContinuous(new Shot(index, IndexType.SHOT));
 
     //Extend and Contract Climber
     operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
