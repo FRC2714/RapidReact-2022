@@ -93,18 +93,18 @@ public boolean atSetpoint() {
 
   public void closeShot(){
     setTargetRpm(1000);
-    shooterPID.setReference(targetRPM, CANSparkMax.ControlType.kSmartVelocity);
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
     System.out.println("Close Shot");
   }
 
   public void midShot() {
     setTargetRpm(2000);
-    shooterPID.setReference(targetRPM, CANSparkMax.ControlType.kSmartVelocity);
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
     System.out.println("Mid Shot");
   }
   public void longShot() {
     setTargetRpm(3000);
-    shooterPID.setReference(targetRPM, CANSparkMax.ControlType.kSmartVelocity);
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
     System.out.println("Long Shot");
 
   }
