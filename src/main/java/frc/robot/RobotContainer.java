@@ -59,6 +59,7 @@ public class RobotContainer {
   private POVButton operatorDPadLeft = new POVButton(operatorStick, 90);
   private POVButton operatorDPadDown = new POVButton(operatorStick, 180);
   private POVButton operatorDPadRight = new POVButton(operatorStick, 270);
+  Trigger operatorRightTrigger = new Trigger(() -> operatorStick.getRawAxis(3) > 0.1);
   //private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -88,7 +89,7 @@ public class RobotContainer {
 
     //Intake and extake 
     operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
-    operatorXButton.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+    operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
 
     //Starting and Stoping the Shooter
    // operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
@@ -98,7 +99,7 @@ public class RobotContainer {
 
 
     //Shot
-    operatorLeftBumper.whileHeld(new Shot(index));
+    operatorRightTrigger.whileActiveContinuous(new Shot(index));
 
     //Extend and Contract Climber
     operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
