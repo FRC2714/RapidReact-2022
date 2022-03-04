@@ -43,9 +43,8 @@ public class Shooter extends SubsystemBase {
 
     shooterEncoder = shooterMotor1.getEncoder();
 
-    shooterMotor2.setInverted(true);
 
-    shooterMotor2.follow(shooterMotor1);
+    shooterMotor2.follow(shooterMotor1, true);
 
     shooterPID = shooterMotor1.getPIDController();
     shooterPID.setFF(ShooterConstants.kSparkMaxFeedforward);
