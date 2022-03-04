@@ -247,9 +247,9 @@ public class Drivetrain extends SubsystemBase {
     /**
      * @return True if external encoders and internal encoders conflict
      */
-   public boolean isEncoderError() {
-        return internalOdometry.getPoseMeters().getTranslation().getDistance(externalOdometry.getPoseMeters().getTranslation()) > 0.5;
-    }
+//    public boolean isEncoderError() {
+//         return internalOdometry.getPoseMeters().getTranslation().getDistance(externalOdometry.getPoseMeters().getTranslation()) > 0.5;
+//     }
     
 
     /**

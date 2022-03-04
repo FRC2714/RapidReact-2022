@@ -10,11 +10,13 @@ public class Shot extends CommandBase {
     private Shooter shooter;
     private Index index;
     private Intake intake;
+    private IndexType indexType;
 
-    public Shot(Shooter shooter, Intake intake, Index index){
+    public Shot(Shooter shooter, Intake intake, Index index, IndexType indexType){
         this.shooter = shooter;
         this.index = index;
         this.intake = intake;
+        this.indexType = indexType;
     }
 
     @Override
@@ -23,7 +25,14 @@ public class Shot extends CommandBase {
 
     @Override
     public void execute() {
-        index.setBothTowerPower(0.5);
+        switch(indexType){
+            case SINGLESHOT:
+                Index.setIndexState(Index.IndexState.SHOOTING);
+                break;
+            case DEFAULT:
+              Index.setIndexState(Index.IndexState.DEFAULT);
+              break;
+        }
     }
 
     @Override

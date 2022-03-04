@@ -9,8 +9,10 @@ import com.revrobotics.*;
 import com.revrobotics.CANSparkMax.ControlType;
 
 import edu.wpi.first.math.util.Units;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.utils.InterpolatingTreeMap;
+import edu.wpi.first.wpilibj.smartdashboard.*;
 
 
 
@@ -35,16 +37,21 @@ public class Shooter extends SubsystemBase {
     shooterMotor1 = new CANSparkMax(ShooterConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     shooterMotor2 = new CANSparkMax(ShooterConstants.kRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     
-    shooterMotor1.setSmartCurrentLimit(30);
-    shooterMotor2.setSmartCurrentLimit(30);
+    shooterMotor1.setSmartCurrentLimit(60);
+    shooterMotor2.setSmartCurrentLimit(60);
+    
 
     shooterEncoder = shooterMotor1.getEncoder();
+
 
     shooterMotor2.follow(shooterMotor1, true);
 
     shooterPID = shooterMotor1.getPIDController();
     shooterPID.setFF(ShooterConstants.kSparkMaxFeedforward);
     shooterPID.setP(ShooterConstants.kSparkMaxP);
+    shooterPID.setI(ShooterConstants.KSparkMaxI);
+    shooterPID.setD(ShooterConstants.KSparkMaxD);
+    
 
     populateVelocityMap();
   }
@@ -84,7 +91,25 @@ public boolean atSetpoint() {
     return Math.abs(targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
 }
 
+  public void closeShot(){
+    setTargetRpm(1000);
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+    System.out.println("Close Shot");
+  }
+
+  public void midShot() {
+    setTargetRpm(2000);
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+    System.out.println("Mid Shot");
+  }
+  public void longShot() {
+    setTargetRpm(3000);
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+    System.out.println("Long Shot");
+
+  }
+
   public void disable(){
-    shooterMotor1.set(0);
+    shooterPID.setReference(0, CANSparkMax.ControlType.kSmartVelocity);
   }
 }
