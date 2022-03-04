@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.Index.Shot;
-import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.auto.Normalauto;
@@ -99,7 +98,7 @@ public class RobotContainer {
 
 
     //Shot
-    operatorLeftBumper.whenPressed(new Shot(shooter, intake, index, IndexType.SINGLESHOT));
+    operatorLeftBumper.whileHeld(new Shot(index));
 
     //Extend and Contract Climber
     operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
@@ -116,7 +115,6 @@ public class RobotContainer {
   public Command getNormalauto() {
     return new Normalauto(drivetrain);
 }
-
 
 public Command getNothingAuto(){
   return new InstantCommand(() -> drivetrain.tankDriveVolts(0,0));
