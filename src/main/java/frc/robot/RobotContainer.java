@@ -20,6 +20,7 @@ import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.subsystems.*;
 
 /**
@@ -58,6 +59,9 @@ public class RobotContainer {
   private JoystickButton driverXButton = new JoystickButton(driverStick, 3);
   private JoystickButton driverYButton = new JoystickButton(driverStick, 4);
 
+  private POVButton operatorDPadUP = new POVButton(operatorStick, 0);
+  private POVButton operatorDPadDOWN = new POVButton(operatorStick, 180);
+
 
   //private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -90,8 +94,8 @@ public class RobotContainer {
     operatorRightShoulder.whileHeld(new Shot(shooter, intake, index));
 
     //Extend and Contract Climber
-    operatorXButton.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
-    operatorAButton.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+    operatorDPadUP.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
+    operatorDPadDOWN.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
 
     //AlignToTarget added here when complete
   }
