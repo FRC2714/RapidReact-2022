@@ -27,21 +27,18 @@ public class IntakeCommand extends CommandBase{
             intake.extakeBalls();
             serializer.unCerealBalls();
             Index.setIndexState(Index.IndexState.EXTAKING); 
-            System.out.println("Removing Balls");
             break;
 
             case INTAKE:
             intake.intakeBalls();  
             serializer.serializeBalls();          
             Index.setIndexState(Index.IndexState.INTAKING);
-            System.out.println("Collecting Balls");
             break;
 
             case DISABLE: 
             intake.disable();
             serializer.disable();
             Index.setIndexState(Index.IndexState.DEFAULT);
-            System.out.println("Disabled");
             break; 
         }
 
@@ -54,7 +51,6 @@ public class IntakeCommand extends CommandBase{
     @Override
     public void end(boolean interrupted) {
         super.end(interrupted);
-        System.out.println("End()");
 
         intake.disable();
         serializer.disable();
