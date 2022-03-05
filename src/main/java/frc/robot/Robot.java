@@ -4,14 +4,10 @@
 
 package frc.robot;
 
-import org.ejml.dense.row.decomposition.eig.watched.WatchedDoubleStepQREigenvector_DDRM;
-
 import edu.wpi.first.wpilibj.TimedRobot;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -37,10 +33,9 @@ public class Robot extends TimedRobot {
     robotContainer = new RobotContainer();
     autoChooser = new SendableChooser<>();
 
-    // autoChooser.setDefaultOption("Normal Auton", robotContainer.getNormalauto());
+    autoChooser.setDefaultOption("Normal Auton", robotContainer.getNormalauto());
     autoChooser.addOption("Do Nothing", robotContainer.getNothingAuto());
-    // autoChooser.addOption("Straight Line Test", robotContainer.getStraightLineAuto());
-    autoChooser.addOption("One Ball AUton", robotContainer.getOneBallAuto());
+    autoChooser.addOption("Straight Line Test", robotContainer.getStraightLineAuto());
     // autoChooser.addOption("Move Back from Top Tarmac and Shoot", robotContainer.getBackShootAuto());
   
     
@@ -75,7 +70,7 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousInit() {
     m_autonomousCommand = autoChooser.getSelected();
-
+    m_autonomousCommand.initialize();
 
     if (m_autonomousCommand != null) {
         m_autonomousCommand.schedule();
@@ -84,9 +79,7 @@ public class Robot extends TimedRobot {
 
   /** This function is called periodically during autonomous. */
   @Override
-  public void autonomousPeriodic() {
-
-  }
+  public void autonomousPeriodic() {}
 
   @Override
   public void teleopInit() {
