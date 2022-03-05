@@ -92,12 +92,12 @@ public boolean atSetpoint() {
 }
 
   public void closeShot(){
-    setTargetRpm(1400);
+    setTargetRpm(1200);
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
 
   public void midShot() {
-    setTargetRpm(2100);
+    setTargetRpm(1800);
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
   public void longShot() {
