@@ -66,11 +66,16 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        public static double kSparkMaxP = 0.0006;
-        public static double kSparkMaxFeedforward = 0.000195; // .00022
+        public static double kSparkMaxP = 0.00001;
+        public static double KSparkMaxI = 0;
+        public static double KSparkMaxD = 0;
+        public static double kSparkMaxFeedforward = 0.00018; // .00022
+
+       
 
         public static int kLeftMotorPort = 9;
         public static int kRightMotorPort = 10;
+
 
         public static double kVelocityTolerance = 115;
     }
@@ -80,7 +85,6 @@ public final class Constants {
         public static int kiTowerPort = 12;
         public static int koTowerPort = 11;
     }
-
     public static final class CameraConstants {
         public static double kCameraHeight = Units.inchesToMeters(27); 
         public static double kCameraMountingAngle = 29; // degrees

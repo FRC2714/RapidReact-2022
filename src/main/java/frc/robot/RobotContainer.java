@@ -16,10 +16,13 @@ import frc.robot.commands.auto.StraightLineTest;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.shooter.TeleOpShooter;
+import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.*;
 
 /**
@@ -48,17 +51,16 @@ public class RobotContainer {
 
   private JoystickButton operatorAButton = new JoystickButton(operatorStick, 1);
   private JoystickButton operatorBButton = new JoystickButton(operatorStick, 2);
-  private JoystickButton operatorLeftShoulder = new JoystickButton(operatorStick, 5);
-  private JoystickButton operatorRightShoulder = new JoystickButton(operatorStick, 6);
+  private JoystickButton operatorLeftBumper = new JoystickButton(operatorStick, 5);
+  private JoystickButton operatorRightBumper = new JoystickButton(operatorStick, 6);
   private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
   private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
-  
-  private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
-  private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
-  private JoystickButton driverXButton = new JoystickButton(driverStick, 3);
-  private JoystickButton driverYButton = new JoystickButton(driverStick, 4);
-
-
+  private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
+  private POVButton operatorDPadUp = new POVButton(operatorStick, 0);
+  private POVButton operatorDPadLeft = new POVButton(operatorStick, 90);
+  private POVButton operatorDPadDown = new POVButton(operatorStick, 180);
+  private POVButton operatorDPadRight = new POVButton(operatorStick, 270);
+  Trigger operatorRightTrigger = new Trigger(() -> operatorStick.getRawAxis(3) > 0.1);
   //private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -78,26 +80,36 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    //Intake and extake
-    operatorBButton.whileHeld(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
 
-    operatorYButton.whileHeld(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+
    
-   //Starting and Stoping the Shooter
-    driverAButton.whileHeld(new TeleOpShooter(shooter));
-   
-   //shot
-    operatorRightShoulder.whileHeld(new Shot(shooter, intake, index));
 
     //Extend and Contract Climber
-    operatorXButton.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
-    operatorAButton.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+    operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
+    operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+
+    //Intake and extake 
+    operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
+    operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
+    operatorLeftBumper.whileHeld(new Shot(index, IndexType.EXTAKE));
+    //Starting and Stoping the Shooter
+   // operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
+    operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
+    operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
+    operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
+
+
+    //Shot
+    operatorRightTrigger.whileActiveContinuous(new Shot(index, IndexType.SHOT));
+
+    //Extend and Contract Climber
+    operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
+    operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
 
     //AlignToTarget added here when complete
   }
 
-
-  /**
+  /*
    * Use this to pass the autonomous command to the main {@link Robot} class.
    *
    * @return the command to run in autonomous
@@ -105,7 +117,6 @@ public class RobotContainer {
   public Command getNormalauto() {
     return new Normalauto(drivetrain);
 }
-
 
 public Command getNothingAuto(){
   return new InstantCommand(() -> drivetrain.tankDriveVolts(0,0));

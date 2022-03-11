@@ -7,14 +7,12 @@ import frc.robot.subsystems.Shooter;
 
 public class Shot extends CommandBase {
 
-    private Shooter shooter;
     private Index index;
-    private Intake intake;
+    private IndexType indexType;
 
-    public Shot(Shooter shooter, Intake intake, Index index){
-        this.shooter = shooter;
+    public Shot(Index index, IndexType indexType){
         this.index = index;
-        this.intake = intake;
+        this.indexType = indexType;
     }
 
     @Override
@@ -23,20 +21,23 @@ public class Shot extends CommandBase {
 
     @Override
     public void execute() {
-        index.setBothTowerPower(0.5);
+        switch(indexType){
+            case SHOT:
+            index.setBothTowerPower(1);
+            break;
+            case EXTAKE:
+            index.setBothTowerPower(-1);
+        }
     }
 
     @Override
     public void end(boolean interrupted) {
-        intake.disable();
-        shooter.disable();
         index.disable();
-        Index.setIndexState(Index.IndexState.DEFAULT);
     }
 
-    public enum IndexType{
-        LOADING,
-        SINGLESHOT,
-        DEFAULT
+    public enum IndexType {
+        SHOT,
+        EXTAKE
     }
+
 }
