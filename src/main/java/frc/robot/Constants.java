@@ -66,7 +66,7 @@ public final class Constants {
     }
 
     public static final class ShooterConstants {
-        public static double kSparkMaxP = 0.00001;
+        public static double kSparkMaxP = 0.00002;
         public static double KSparkMaxI = 0;
         public static double KSparkMaxD = 0;
         public static double kSparkMaxFeedforward = 0.00018; // .00022
