@@ -31,6 +31,11 @@ public class Shooter extends SubsystemBase {
   private double targetRPM = 0.0;
   private double incrementRPM = 0.0;
 
+  private double closeShotRPM = 1400;
+  private double midShotRPM = 2100;
+  private double longShotRPM = 2750;
+  
+
   public Shooter(Limelight limelight){
     this.limelight = limelight;
 
@@ -92,16 +97,16 @@ public boolean atSetpoint() {
 }
 
   public void closeShot(){
-    setTargetRpm(1400);
+    setTargetRpm(closeShotRPM);
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
 
   public void midShot() {
-    setTargetRpm(2100);
+    setTargetRpm(midShotRPM);
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
   public void longShot() {
-    setTargetRpm(2750);
+    setTargetRpm(longShotRPM);
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
 
   }
