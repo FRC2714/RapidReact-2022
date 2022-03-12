@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - master
+      - irving
   pull_request:
     branches:
       - master
+      - irving
 
 jobs:
   build:
