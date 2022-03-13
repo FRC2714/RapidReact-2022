@@ -77,6 +77,7 @@ public class Shooter extends SubsystemBase {
 
   public void setTargetRpm(double targetRPM) {
     this.targetRPM = targetRPM;
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
 
   public double getVelocity() { // in rpm
@@ -98,16 +99,13 @@ public boolean atSetpoint() {
 
   public void closeShot(){
     setTargetRpm(closeShotRPM);
-    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
 
   public void midShot() {
     setTargetRpm(midShotRPM);
-    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
   public void longShot() {
     setTargetRpm(longShotRPM);
-    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
 
   }
 

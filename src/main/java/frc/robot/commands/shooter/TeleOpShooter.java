@@ -26,12 +26,15 @@ public class TeleOpShooter extends CommandBase {
         switch(shooterSpeed){
             case CLOSE:
                 shooter.closeShot();
+                System.out.println(shooter.getVelocity());
                 break;
             case MID:
                 shooter.midShot();
+                System.out.println(shooter.getVelocity());
                 break;
             case FAR:
                 shooter.longShot();
+                System.out.println(shooter.getVelocity());
                 break;
             case DISABLE:
                 shooter.disable();
