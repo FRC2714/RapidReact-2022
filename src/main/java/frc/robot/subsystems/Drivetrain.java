@@ -45,7 +45,7 @@ public class Drivetrain extends SubsystemBase {
     private final Encoder rightEncoder = new Encoder(
             DriveConstants.kRightEncoderPorts[0],
             DriveConstants.kRightEncoderPorts[1],
-            true,
+            false,
             CounterBase.EncodingType.k4X
     );
 
@@ -241,9 +241,8 @@ public class Drivetrain extends SubsystemBase {
      * @return the robot's heading in degrees, from 180 to 180
      */
     public double getHeading() {
-        return navx.getRotation2d().getDegrees();
+        return Math.IEEEremainder(navx.getAngle(), 360) * (DriveConstants.kGyroReversed ? -1.0 : 1.0);
     }
-
     /**
      * @return True if external encoders and internal encoders conflict
      */
@@ -298,8 +297,8 @@ public class Drivetrain extends SubsystemBase {
                 rightDist);
 
         internalOdometry.update(Rotation2d.fromDegrees(getHeading()),
-                (-leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius,
-                (rightNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
+                (leftNeoEncoder.getPosition() / 11.25) * 2 * Math.PI * DriveConstants.kWheelRadius,
+                (rightNeoEncoder.getPosition() / 11.25) * 2 * Math.PI * DriveConstants.kWheelRadius);
 
         live_dashboard.getEntry("robotX").setDouble(Units.metersToFeet(getPose().getTranslation().getX()));
         live_dashboard.getEntry("robotY").setDouble(Units.metersToFeet(getPose().getTranslation().getY()));
@@ -315,8 +314,8 @@ public class Drivetrain extends SubsystemBase {
         SmartDashboard.putNumber("Left Encoder = ", leftEncoder.getDistance());
         SmartDashboard.putNumber("Right Encoder = ", rightEncoder.getDistance());
 
-        SmartDashboard.putNumber("NEO left Encoder", (leftNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
-        SmartDashboard.putNumber("NEO right encoder", (rightNeoEncoder.getPosition() / 8.73) * 2 * Math.PI * DriveConstants.kWheelRadius);
+        SmartDashboard.putNumber("NEO left Encoder", (leftNeoEncoder.getPosition() / 11.25) * 2 * Math.PI * DriveConstants.kWheelRadius);
+        SmartDashboard.putNumber("NEO right encoder", (rightNeoEncoder.getPosition() / 11.25) * 2 * Math.PI * DriveConstants.kWheelRadius);
 
     }
 
