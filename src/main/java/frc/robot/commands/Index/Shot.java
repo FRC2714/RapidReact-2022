@@ -1,16 +1,16 @@
 package frc.robot.commands.Index;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.Index;
+import frc.robot.subsystems.Tower;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Shooter;
 
 public class Shot extends CommandBase {
 
-    private Index index;
+    private Tower index;
     private IndexType indexType;
 
-    public Shot(Index index, IndexType indexType){
+    public Shot(Tower index, IndexType indexType){
         this.index = index;
         this.indexType = indexType;
     }

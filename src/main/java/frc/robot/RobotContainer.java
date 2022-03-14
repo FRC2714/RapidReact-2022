@@ -36,7 +36,7 @@ public class RobotContainer {
   private final Drivetrain drivetrain = new Drivetrain();
   private final Limelight limelight = new Limelight();
   private final Shooter shooter = new Shooter(limelight);
-  private final Index index = new Index(); 
+  private final Tower tower = new Tower(); 
   private final Intake intake = new Intake(); 
   private final Climber climber = new Climber(); 
   private final Serializer serializer = new Serializer();
@@ -89,9 +89,9 @@ public class RobotContainer {
     operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
 
     //Intake and extake 
-    operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer));
-    operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer));
-    operatorLeftBumper.whileHeld(new Shot(index, IndexType.EXTAKE));
+    operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer, tower));
+    operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer, tower));
+    operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE));
     //Starting and Stoping the Shooter
    // operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
     operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
@@ -100,7 +100,7 @@ public class RobotContainer {
 
 
     //Shot
-    operatorRightTrigger.whileActiveContinuous(new Shot(index, IndexType.SHOT));
+    operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT));
 
     //Extend and Contract Climber
     operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
