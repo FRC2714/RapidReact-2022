@@ -13,14 +13,12 @@ import java.util.List;
 public class StraightLineTest extends SequentialCommandGroup {
 
     public StraightLineTest(Drivetrain drivetrain){
-        new Rotation2d();
-        new Rotation2d();
         CustomRamseteCommand StraightLine =
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(39.893), Units.feetToMeters(24.31), Rotation2d.fromDegrees(0.00)),
-                new Pose2d(Units.feetToMeters(31.611), Units.feetToMeters(22.345), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(34.882), Units.feetToMeters(14.484), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(24), Units.feetToMeters(14.484), Rotation2d.fromDegrees(0.00))
             ),
             Units.feetToMeters(3), Units.feetToMeters(3), true
         );
