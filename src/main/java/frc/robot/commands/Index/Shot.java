@@ -2,17 +2,21 @@ package frc.robot.commands.Index;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Tower;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 
 public class Shot extends CommandBase {
 
-    private Tower index;
+    private Tower tower;
     private IndexType indexType;
+    private Serializer serializer;
+    private Shooter shooter;
 
-    public Shot(Tower index, IndexType indexType){
-        this.index = index;
+    public Shot(Tower tower, IndexType indexType, Serializer serializer, Shooter shooter){
+        this.tower = tower;
         this.indexType = indexType;
+        this.serializer = serializer;
+        this.shooter = shooter;
     }
 
     @Override
@@ -23,16 +27,18 @@ public class Shot extends CommandBase {
     public void execute() {
         switch(indexType){
             case SHOT:
-            index.setBothTowerPower(1);
+            tower.setBothTowerPower(0.5);
+            serializer.serializeBalls();
             break;
             case EXTAKE:
-            index.setBothTowerPower(-1);
+            tower.setBothTowerPower(-1);
         }
     }
 
     @Override
     public void end(boolean interrupted) {
-        index.disable();
+        tower.disable();
+        serializer.disable();
     }
 
     public enum IndexType {

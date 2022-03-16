@@ -91,7 +91,7 @@ public class RobotContainer {
     //Intake and extake 
     operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer, tower));
     operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer, tower));
-    operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE));
+    operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE, serializer, shooter));
     //Starting and Stoping the Shooter
    // operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
     operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
@@ -100,7 +100,7 @@ public class RobotContainer {
 
 
     //Shot
-    operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT));
+    operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT, serializer, shooter));
 
     //Extend and Contract Climber
     operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));

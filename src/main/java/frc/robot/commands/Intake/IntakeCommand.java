@@ -18,6 +18,7 @@ public class IntakeCommand extends CommandBase{
         this.intake = intake;
         this.intakeType = intakeType;
         this.serializer = serializer;
+        this.tower = tower;
     }
 
 
