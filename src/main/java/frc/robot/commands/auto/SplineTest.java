@@ -10,17 +10,17 @@ import frc.robot.utils.*;
 
 import java.util.List;
 
-public class StraightLineTest extends SequentialCommandGroup {
+public class SplineTest extends SequentialCommandGroup {
 
-    public StraightLineTest(Drivetrain drivetrain){
+    public SplineTest(Drivetrain drivetrain){
         CustomRamseteCommand StraightLine =
             RamseteGenerator.getRamseteCommand(
             drivetrain,
             List.of(
-                new Pose2d(Units.feetToMeters(34.882), Units.feetToMeters(14.484), Rotation2d.fromDegrees(0.00)),
-                new Pose2d(Units.feetToMeters(24), Units.feetToMeters(14.484), Rotation2d.fromDegrees(0.00))
+                new Pose2d(Units.feetToMeters(31), Units.feetToMeters(12), Rotation2d.fromDegrees(0.00)),
+                new Pose2d(Units.feetToMeters(37), Units.feetToMeters(5), Rotation2d.fromDegrees(0.00))
             ),
-            Units.feetToMeters(3), Units.feetToMeters(3), true
+            Units.feetToMeters(3), Units.feetToMeters(3), false
         );
             addCommands(
                 sequence(

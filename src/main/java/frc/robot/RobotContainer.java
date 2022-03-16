@@ -12,7 +12,7 @@ import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.auto.Normalauto;
-import frc.robot.commands.auto.StraightLineTest;
+import frc.robot.commands.auto.SplineTest;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.shooter.TeleOpShooter;
@@ -122,7 +122,7 @@ public Command getNothingAuto(){
   return new InstantCommand(() -> drivetrain.tankDriveVolts(0,0));
 }
 
-public Command getStraightLineAuto(){
-  return new StraightLineTest(drivetrain);
+public Command getSplineAuto(){
+  return new SplineTest(drivetrain);
 }
 }
