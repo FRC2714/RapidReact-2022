@@ -18,6 +18,7 @@ public class IntakeCommand extends CommandBase{
         this.intake = intake;
         this.intakeType = intakeType;
         this.serializer = serializer;
+        this.tower = tower;
     }
 
 
@@ -33,7 +34,7 @@ public class IntakeCommand extends CommandBase{
             case INTAKE:
             intake.intakeBalls();  
             serializer.serializeBalls();          
-            tower.breakBeamTower();
+            tower.setBothTowerPower(0.25);
             break;
 
             case DISABLE: 
