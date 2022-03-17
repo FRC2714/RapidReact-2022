@@ -14,8 +14,6 @@ import frc.robot.Constants.ShooterConstants;
 import frc.robot.utils.InterpolatingTreeMap;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
-
-
 public class Shooter extends SubsystemBase {
   public CANSparkMax shooterMotor1;
   public CANSparkMax shooterMotor2;
@@ -34,20 +32,17 @@ public class Shooter extends SubsystemBase {
   private double closeShotRPM = 1400;
   private double midShotRPM = 2100;
   private double longShotRPM = 2750;
-  
 
-  public Shooter(Limelight limelight){
+  public Shooter(Limelight limelight) {
     this.limelight = limelight;
 
     shooterMotor1 = new CANSparkMax(ShooterConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     shooterMotor2 = new CANSparkMax(ShooterConstants.kRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-    
+
     shooterMotor1.setSmartCurrentLimit(60);
     shooterMotor2.setSmartCurrentLimit(60);
-    
 
     shooterEncoder = shooterMotor1.getEncoder();
-
 
     shooterMotor2.follow(shooterMotor1, true);
 
@@ -56,12 +51,11 @@ public class Shooter extends SubsystemBase {
     shooterPID.setP(ShooterConstants.kSparkMaxP);
     shooterPID.setI(ShooterConstants.KSparkMaxI);
     shooterPID.setD(ShooterConstants.KSparkMaxD);
-    
 
     populateVelocityMap();
   }
-  
-  public void populateVelocityMap(){
+
+  public void populateVelocityMap() {
     shooterVelocity.put(6.8, 2200.0);
     shooterVelocity.put(11.1, 2050.0);
     shooterVelocity.put(14.3, 2100.0);
@@ -71,9 +65,9 @@ public class Shooter extends SubsystemBase {
 
   }
 
-  public void setShooterPower(double power){
+  public void setShooterPower(double power) {
     shooterMotor1.set(-power);
-}
+  }
 
   public void setTargetRpm(double targetRPM) {
     this.targetRPM = targetRPM;
@@ -85,31 +79,34 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getTargetRpm() {
-    return limelight.targetVisible() ? shooterVelocity.getInterpolated(Units.metersToFeet(limelight.getDistanceToGoal())) + incrementRPM: defaultRPM;
+    return limelight.targetVisible()
+        ? shooterVelocity.getInterpolated(Units.metersToFeet(limelight.getDistanceToGoal())) + incrementRPM
+        : defaultRPM;
   }
 
   public void setDynamicRpm() {
     shooterPID.setReference(getTargetRpm(), ControlType.kVelocity);
     setTargetRpm(getTargetRpm());
-}
+  }
 
-public boolean atSetpoint() {
+  public boolean atSetpoint() {
     return Math.abs(targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
-}
+  }
 
-  public void closeShot(){
+  public void closeShot() {
     setTargetRpm(closeShotRPM);
   }
 
   public void midShot() {
     setTargetRpm(midShotRPM);
   }
+
   public void longShot() {
     setTargetRpm(longShotRPM);
 
   }
 
-  public void disable(){
+  public void disable() {
     shooterPID.setReference(0, CANSparkMax.ControlType.kVelocity);
     shooterMotor1.set(0);
   }
