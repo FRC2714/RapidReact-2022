@@ -4,15 +4,15 @@
 
 package frc.robot;
 
+//import controller buttons
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+
 import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
-import frc.robot.commands.auto.Normalauto;
-import frc.robot.commands.auto.SplineTest;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.shooter.TeleOpShooter;
@@ -24,6 +24,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.*;
+
+//import autos
+import frc.robot.commands.auto.SplineTest;
+import frc.robot.commands.auto.FiveBallAuto;
+import frc.robot.commands.auto.FourBallAuto;
+import frc.robot.commands.auto.TwoBallAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -109,9 +115,6 @@ public class RobotContainer {
 	 *
 	 * @return the command to run in autonomous
 	 */
-	public Command getNormalauto() {
-		return new Normalauto(drivetrain);
-	}
 
 	public Command getNothingAuto() {
 		return new InstantCommand(() -> drivetrain.tankDriveVolts(0, 0));
@@ -119,5 +122,17 @@ public class RobotContainer {
 
 	public Command getSplineAuto() {
 		return new SplineTest(drivetrain);
-    }
+	}
+
+	public Command getFiveBallAuto() {
+		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
+	}
+
+	public Command getFourBallAuto() {
+		return new FourBallAuto(drivetrain, shooter, intake, serializer, tower);
+	}
+
+	public Command getTwoBallAuto() {
+		return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower);
+	}
 }
