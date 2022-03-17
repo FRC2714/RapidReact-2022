@@ -1,10 +1,11 @@
 package frc.robot.commands.Intake;
 
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Tower;
 
-public class AutoIntake {
+public class AutoIntake extends CommandBase {
     private Intake intake;
     private Tower tower;
     private Serializer serializer;
