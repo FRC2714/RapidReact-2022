@@ -17,9 +17,9 @@ import frc.robot.utils.*;
 
 import java.util.List;
 
-public class FourBallAuto extends SequentialCommandGroup {
+public class FiveBallAuto extends SequentialCommandGroup {
 
-	public FourBallAuto(Drivetrain drivetrain, Shooter shooter, Intake intake, Serializer serializer, Tower tower) {
+	public FiveBallAuto(Drivetrain drivetrain, Shooter shooter, Intake intake, Serializer serializer, Tower tower) {
 		CustomRamseteCommand splineToBallOne =
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
@@ -43,9 +43,18 @@ public class FourBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(49.5), Units.feetToMeters(22.2), Rotation2d.fromDegrees(45)),
-					new Pose2d(Units.feetToMeters(38.1), Units.feetToMeters(18.2), Rotation2d.fromDegrees(-155))
+					new Pose2d(Units.feetToMeters(35.0), Units.feetToMeters(11.4), Rotation2d.fromDegrees(180))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), true
+			);
+      CustomRamseteCommand shotToFith =
+			RamseteGenerator.getRamseteCommand(
+				drivetrain,
+				List.of(
+					new Pose2d(Units.feetToMeters(35.0), Units.feetToMeters(11.4), Rotation2d.fromDegrees(180)),
+					new Pose2d(Units.feetToMeters(37.2), Units.feetToMeters(21.4), Rotation2d.fromDegrees(-135))
+				),
+				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
 		addCommands(
 			sequence(
@@ -62,16 +71,27 @@ public class FourBallAuto extends SequentialCommandGroup {
 					//Run shooter for 0.5s
 					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
 				),
+
 				deadline(
 					//Run intake and move to Human Player
 					splineToHuman,
 					new AutoIntake(intake, tower, serializer).withTimeout(2)
 				),
+
 				deadline(
 					//Move to shooting position
 					splineToShot
 				),
 				deadline(
+					//Run shooter for 0.5s
+					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
+				),
+
+        deadline(
+					//Move to fifth ball
+					shotToFith
+				),
+        deadline(
 					//Run shooter for 0.5s
 					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
 				)
