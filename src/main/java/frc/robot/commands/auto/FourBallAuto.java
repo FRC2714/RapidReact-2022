@@ -38,7 +38,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
-      CustomRamseteCommand splineToShot =
+		CustomRamseteCommand splineToShot =
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
@@ -49,30 +49,30 @@ public class FourBallAuto extends SequentialCommandGroup {
 			);
 		addCommands(
 			sequence(
-        //reset odometry
+				//reset odometry
 				new InstantCommand(() -> drivetrain.resetOdometry(splineToBallOne.getInitialPose())),
 
 				deadline(
-          //Run intake and vove to first ball
+					//Run intake and vove to first ball
 					splineToBallOne,
 					new AutoIntake(intake, tower, serializer)
 
 				),
 				deadline(
-          //activate shooter for 0.5s
+					//activate shooter for 0.5s
 					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
 				),
 				deadline(
-          //Run intake and move to Human Player
+					//Run intake and move to Human Player
 					splineToHuman,
 					new AutoIntake(intake, tower, serializer).withTimeout(2)
 				),
-        deadline(
-          //Move to shooting position
+				deadline(
+					//Move to shooting position
 					splineToShot
 				),
-        deadline(
-          //activate shooter for 0.5s
+				deadline(
+					//activate shooter for 0.5s
 					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
 				)
 			)
