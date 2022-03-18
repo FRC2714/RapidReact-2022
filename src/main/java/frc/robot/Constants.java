@@ -77,7 +77,7 @@ public final class Constants {
         public static int kRightMotorPort = 10;
 
 
-        public static double kVelocityTolerance = 115;
+        public static double kVelocityTolerance = 50;
     }
 
     public static final class IndexConstants {

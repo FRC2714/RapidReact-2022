@@ -70,6 +70,7 @@ public class Shooter extends SubsystemBase {
   public void setTargetRpm(double targetRPM) {
     this.targetRPM = targetRPM;
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+    System.out.println("Target RPM" + getVelocity());
   }
 
   public double getVelocity() { // in rpm
@@ -88,7 +89,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean atSetpoint() {
-    return Math.abs(targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
+    return Math.abs(-targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
   }
 
   public void closeShot() {
@@ -101,7 +102,6 @@ public class Shooter extends SubsystemBase {
 
   public void longShot() {
     setTargetRpm(longShotRPM);
-
   }
 
   public void disable() {

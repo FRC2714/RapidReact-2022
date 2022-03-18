@@ -1,14 +1,11 @@
 package frc.robot.commands.shooter;
 
-import java.util.Set;
-
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Subsystem;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Serializer;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Tower;
 
-public class Shot implements Command {
+public class Shot extends CommandBase {
     private Shooter shooter;
     private Serializer serializer;
     private Tower tower;
@@ -43,6 +40,7 @@ public class Shot implements Command {
             if(shooter.atSetpoint()){
                 tower.setBothTowerPower(1);
                 serializer.serializeBalls();
+              System.out.println("At Velocity");
             }
             break;
             case FAR:
@@ -55,15 +53,10 @@ public class Shot implements Command {
         }
     }
 
-    public void end(){
-        shooter.disable();
-        tower.disable();
-        serializer.disable();
-    }
-
     @Override
-    public Set<Subsystem> getRequirements() {
-        // TODO Auto-generated method stub
-        return null;
+    public void end(boolean interupted){
+        tower.disable();
+        shooter.disable();
+        serializer.disable();
     }
 }
