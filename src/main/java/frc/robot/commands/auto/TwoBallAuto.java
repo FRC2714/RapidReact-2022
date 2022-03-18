@@ -5,13 +5,8 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.AutoShotMid;
 import frc.robot.commands.Intake.AutoIntake;
-import frc.robot.commands.Intake.IntakeCommand;
-import frc.robot.commands.Intake.IntakeCommand.*;
-import frc.robot.commands.shooter.TeleOpShooter;
-import frc.robot.commands.shooter.TeleOpShooter.*;
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 
@@ -25,7 +20,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(30.7), Units.feetToMeters(11.2), Rotation2d.fromDegrees(-22)),
-					new Pose2d(Units.feetToMeters(37.0), Units.feetToMeters(7.2), Rotation2d.fromDegrees(-32))
+					new Pose2d(Units.feetToMeters(38.6), Units.feetToMeters(8.1), Rotation2d.fromDegrees(-32))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
@@ -42,7 +37,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
 				),
 				deadline(
 					//Run shooter for 0.5s
-					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
+					new AutoShotMid(shooter, tower, serializer).withTimeout(2.5)
 				)
 			)
 
