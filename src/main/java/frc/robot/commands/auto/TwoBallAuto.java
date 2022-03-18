@@ -20,7 +20,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(30.7), Units.feetToMeters(11.2), Rotation2d.fromDegrees(-22)),
-					new Pose2d(Units.feetToMeters(38.6), Units.feetToMeters(8.1), Rotation2d.fromDegrees(-32))
+					new Pose2d(Units.feetToMeters(38.2), Units.feetToMeters(7.3), Rotation2d.fromDegrees(-32))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
@@ -37,7 +37,7 @@ public class TwoBallAuto extends SequentialCommandGroup {
 				),
 				deadline(
 					//Run shooter for 0.5s
-					new AutoShotMid(shooter, tower, serializer).withTimeout(2.5)
+					new AutoShotMid(shooter, tower, serializer).withTimeout(2)
 				)
 			)
 

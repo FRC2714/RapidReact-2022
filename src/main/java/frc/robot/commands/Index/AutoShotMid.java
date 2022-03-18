@@ -19,9 +19,12 @@ public class AutoShotMid extends CommandBase{
     public void execute(){
         shooter.midShot();
         if(shooter.atSetpoint()){
-            tower.setBothTowerPower(1);
-         //   serializer.serializeBalls();
-         System.out.println("Shooting");
+            tower.setBothTowerPower(0.25);
+            serializer.serializeBalls();
+        }
+        else{
+            tower.disable();
+            serializer.disable();
         }
     }   
 

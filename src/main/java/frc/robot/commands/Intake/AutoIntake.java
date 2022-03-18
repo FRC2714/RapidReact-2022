@@ -18,7 +18,7 @@ public class AutoIntake extends CommandBase {
 
     public void execute(){
         intake.intakeBalls();
-       // serializer.serializeBalls();
+        serializer.serializeBalls();
         tower.breakBeamTower();
     }
     
