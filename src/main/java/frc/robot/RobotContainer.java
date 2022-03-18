@@ -9,14 +9,12 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
-import frc.robot.commands.Index.Shot;
-import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
-import frc.robot.commands.shooter.TeleOpShooter;
-import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
+import frc.robot.commands.shooter.Shot;
+import frc.robot.commands.shooter.Shot.ShotMode;
 import frc.robot.subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -59,12 +57,12 @@ public class RobotContainer {
 	private JoystickButton operatorLeftBumper = new JoystickButton(operatorStick, 5);
 	private JoystickButton operatorRightBumper = new JoystickButton(operatorStick, 6);
 	private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
-	private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
-	private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
+//	private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
+//	private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
 	private POVButton operatorDPadUp = new POVButton(operatorStick, 0);
-	private POVButton operatorDPadLeft = new POVButton(operatorStick, 90);
+//	private POVButton operatorDPadLeft = new POVButton(operatorStick, 90);
 	private POVButton operatorDPadDown = new POVButton(operatorStick, 180);
-	private POVButton operatorDPadRight = new POVButton(operatorStick, 270);
+//	private POVButton operatorDPadRight = new POVButton(operatorStick, 270);
 	Trigger operatorRightTrigger = new Trigger(() -> operatorStick.getRawAxis(3) > 0.1);
 	//private JoystickButton operatorUnjamButton = new JoystickButton(operatorStick, 7);
 	/** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -93,21 +91,15 @@ public class RobotContainer {
 		//Intake and extake 
 		operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer, tower));
 		operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer, tower));
-		operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE, serializer, shooter));
-		//Starting and Stoping the Shooter
-		// operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
-		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
-		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
-		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
 
-		//Shot
-		operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT, serializer, shooter));
+		// operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
+		operatorAButton.whileHeld(new Shot(shooter, serializer, tower, ShotMode.CLOSE));
+		operatorBButton.whileHeld(new Shot(shooter, serializer, tower, ShotMode.MID));
+		operatorYButton.whileHeld(new Shot(shooter, serializer, tower, ShotMode.FAR));
 
 		//Extend and Contract Climber
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
 		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
-
-		//AlignToTarget added here when complete
 	}
 
 	/*

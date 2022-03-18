@@ -5,13 +5,9 @@ import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
-import frc.robot.commands.Index.Shot;
 import frc.robot.commands.Index.AutoShotMid;
 import frc.robot.commands.Intake.AutoIntake;
-import frc.robot.commands.Intake.IntakeCommand;
-import frc.robot.commands.Intake.IntakeCommand.*;
-import frc.robot.commands.shooter.TeleOpShooter;
-import frc.robot.commands.shooter.TeleOpShooter.*;
+
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 

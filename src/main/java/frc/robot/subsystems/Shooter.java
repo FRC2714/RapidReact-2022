@@ -9,10 +9,8 @@ import com.revrobotics.*;
 import com.revrobotics.CANSparkMax.ControlType;
 
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ShooterConstants;
 import frc.robot.utils.InterpolatingTreeMap;
-import edu.wpi.first.wpilibj.smartdashboard.*;
 
 public class Shooter extends SubsystemBase {
   public CANSparkMax shooterMotor1;
