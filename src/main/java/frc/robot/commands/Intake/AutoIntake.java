@@ -22,7 +22,8 @@ public class AutoIntake extends CommandBase {
         tower.breakBeamTower();
     }
     
-    public void end(){
+    @Override
+    public void end(boolean interrupted){
         intake.disable();
         serializer.disable();
         tower.disable();

@@ -24,7 +24,8 @@ public class AutoShotClose extends CommandBase {
         }
     }
 
-    public void end(){
+    @Override
+    public void end(boolean interrupted){
         shooter.disable();
         tower.disable();
         serializer.disable();
