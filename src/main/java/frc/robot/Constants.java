@@ -113,6 +113,9 @@ public final class Constants {
 
         public static int kLeftMotorPort = 13;
         public static int kRightMotorPort = 14;
+
+        public static int kLHighMotorPort = 16;
+        public static int kRHighMotorPort = 17;
     }
 
     public static final class AutoConstants {

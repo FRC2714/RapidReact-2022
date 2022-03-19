@@ -59,8 +59,8 @@ public class RobotContainer {
 	private JoystickButton operatorLeftBumper = new JoystickButton(operatorStick, 5);
 	private JoystickButton operatorRightBumper = new JoystickButton(operatorStick, 6);
 	private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
-	private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
-	private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
+	// private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
+	// private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
 	private POVButton operatorDPadUp = new POVButton(operatorStick, 0);
 	private POVButton operatorDPadLeft = new POVButton(operatorStick, 90);
 	private POVButton operatorDPadDown = new POVButton(operatorStick, 180);
@@ -87,27 +87,25 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		//Extend and Contract Climber
+			//Mid Rung
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
 		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+			//High Rung
+		operatorDPadRight.whileHeld(new MoveClimber(climber, ClimberMotionType.REACH));
+		operatorDPadLeft.whileHeld(new MoveClimber(climber, ClimberMotionType.RECOIL));
 
 		//Intake and extake 
 		operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer, tower));
 		operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer, tower));
 		operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE, serializer, shooter));
+		
 		//Starting and Stoping the Shooter
-		// operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
 		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
 		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
 		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
 
 		//Shot
 		operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT, serializer, shooter));
-
-		//Extend and Contract Climber
-		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
-		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
-
-		//AlignToTarget added here when complete
 	}
 
 	/*
