@@ -90,7 +90,7 @@ public class Shooter extends SubsystemBase {
   }
 
   public boolean atSetpoint() {
-    return Math.abs(targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
+    return Math.abs(-targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
   }
 
   public void closeShot() {

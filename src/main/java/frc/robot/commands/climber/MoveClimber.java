@@ -35,7 +35,6 @@ public class MoveClimber extends CommandBase {
 
     public enum ClimberMotionType{
         EXTEND,
-        RETRACT,
-        LOCK
+        RETRACT
     }
 }

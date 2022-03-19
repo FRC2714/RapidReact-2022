@@ -22,6 +22,10 @@ public class AutoShotMid extends CommandBase{
             tower.setBothTowerPower(0.25);
             serializer.serializeBalls();
         }
+        else{
+            tower.disable();
+            serializer.disable();
+        }
     }   
     @Override
     public void end(boolean interrupted){
