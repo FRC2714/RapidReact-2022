@@ -37,12 +37,12 @@ public class TwoBallAuto extends SequentialCommandGroup {
 				deadline(
 					//Run intake and vove to first ball
 					splineToBallOne,
-					new AutoIntake(intake, tower, serializer)
+					new AutoIntake(intake, tower, serializer).withTimeout(5)
 
 				),
 				deadline(
 					//Run shooter for 0.5s
-					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
+					new AutoShotMid(shooter, tower, serializer).withTimeout(5)
 				)
 			)
 

@@ -23,8 +23,8 @@ public class AutoShotMid extends CommandBase{
             serializer.serializeBalls();
         }
     }   
-
-    public void end(){
+    @Override
+    public void end(boolean interrupted){
         shooter.disable();
         tower.disable();
         serializer.disable();
