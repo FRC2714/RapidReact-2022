@@ -15,6 +15,7 @@ import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
+import frc.robot.commands.drivetrain.AlignToTarget;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
 import frc.robot.subsystems.Drivetrain;
@@ -52,7 +53,7 @@ public class RobotContainer {
 
 	//private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
 	//private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
-	//private JoystickButton driverLeftShoulder = new JoystickButton(driverStick, 5);
+	private JoystickButton driverRightBumper = new JoystickButton(driverStick, 6);
 
 	private JoystickButton operatorAButton = new JoystickButton(operatorStick, 1);
 	private JoystickButton operatorBButton = new JoystickButton(operatorStick, 2);
@@ -86,6 +87,9 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 
+		//autoalign
+		//driverRightBumper.whileHeld(new AlignToTarget(drivetrain, limelight));
+
 		//Extend and Contract Climber
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
 		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
@@ -99,6 +103,7 @@ public class RobotContainer {
 		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
 		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
 		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
+		
 
 		//Shot
 		operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT, serializer, shooter));

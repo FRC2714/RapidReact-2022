@@ -16,7 +16,7 @@ public class Serializer extends SubsystemBase{
 
         lSerializer.setSmartCurrentLimit(35);
 
-        rSerializer.setInverted(true);
+        rSerializer.setInverted(false);
     }
 
     private void setSerializerPower(double power) {
