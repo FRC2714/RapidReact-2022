@@ -16,6 +16,7 @@ import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
 import frc.robot.commands.drivetrain.AlignToTarget;
+import frc.robot.commands.drivetrain.CustomAlignToTarget;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
 import frc.robot.subsystems.Drivetrain;
@@ -89,7 +90,7 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		//autoalign
-		driverRightBumper.whileHeld(new AlignToTarget(drivetrain, limelight));
+		driverRightBumper.whileHeld(new CustomAlignToTarget(drivetrain, limelight, false));
 
 		//Extend and Contract Climber
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
