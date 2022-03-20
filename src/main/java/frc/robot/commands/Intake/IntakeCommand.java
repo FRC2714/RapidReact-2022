@@ -45,8 +45,6 @@ public class IntakeCommand extends CommandBase{
         }
 
         //intake.intakeBalls();
-        System.out.println("Set motor to 0.5");
-        System.out.println("Get output - " + intake.intakeMotor.getAppliedOutput());
     }
 
 
