@@ -11,12 +11,12 @@ public class AlignToTarget extends CommandBase{
     private Drivetrain drivetrain;
 
 
-    private double tolerance = 0.5;
+    private double tolerance = 0.2;
 
     private double kP = 1;
     private double maxOffset = 29;
 
-    public AlignToTarget(Limelight limelight, Drivetrain drivetrain){
+    public AlignToTarget(Drivetrain drivetrain, Limelight limelight){
        this.limelight = limelight;
        this.drivetrain = drivetrain;
     }
@@ -34,10 +34,10 @@ public class AlignToTarget extends CommandBase{
 
         if (Math.abs(angleOffset) > tolerance) {
 
-            if(power > 0.7) power = 0.7;
-            if(power < -0.7) power = -0.7;
+            if(power > 0.7) power = 0.3;
+            if(power < -0.7) power = -0.3;
             
-            drivetrain.arcadeDrive(0, power);
+            drivetrain.arcadeDrive(0, -power);
             
         }
     }

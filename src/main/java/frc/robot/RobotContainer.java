@@ -30,6 +30,7 @@ import frc.robot.subsystems.*;
 import frc.robot.commands.auto.SplineTest;
 import frc.robot.commands.auto.FiveBallAuto;
 import frc.robot.commands.auto.FourBallAuto;
+import frc.robot.commands.auto.OneBallAuto;
 import frc.robot.commands.auto.TwoBallAuto;
 
 /**
@@ -88,7 +89,7 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		//autoalign
-		//driverRightBumper.whileHeld(new AlignToTarget(drivetrain, limelight));
+		driverRightBumper.whileHeld(new AlignToTarget(drivetrain, limelight));
 
 		//Extend and Contract Climber
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
@@ -139,5 +140,9 @@ public class RobotContainer {
 
 	public Command getTwoBallAuto() {
 		return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower);
+	}
+
+	public Command getOneBallAuto(){
+		return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
 	}
 }
