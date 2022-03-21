@@ -31,7 +31,7 @@ public class Shooter extends SubsystemBase {
 
   private double closeShotRPM = 2500;
   private double midShotRPM = 4300;
-  private double longShotRPM = 5000;
+  private double longShotRPM = 8000;
 
   public Shooter(Limelight limelight) {
     this.limelight = limelight;
@@ -52,18 +52,18 @@ public class Shooter extends SubsystemBase {
     shooterPID.setI(ShooterConstants.KSparkMaxI);
     shooterPID.setD(ShooterConstants.KSparkMaxD);
 
-    populateVelocityMap();
+    // populateVelocityMap();
   }
 
-  public void populateVelocityMap() {
-    shooterVelocity.put(6.8, 2200.0);
-    shooterVelocity.put(11.1, 2050.0);
-    shooterVelocity.put(14.3, 2100.0);
-    shooterVelocity.put(22.0, 2350.0);
-    shooterVelocity.put(26.75, 2650.0);
-    shooterVelocity.put(36.0, 3500.0);
+  // public void populateVelocityMap() {
+  //   shooterVelocity.put(6.8, 2200.0);
+  //   shooterVelocity.put(11.1, 2050.0);
+  //   shooterVelocity.put(14.3, 2100.0);
+  //   shooterVelocity.put(22.0, 2350.0);
+  //   shooterVelocity.put(26.75, 2650.0);
+  //   shooterVelocity.put(36.0, 3500.0);
 
-  }
+  // }
 
   public void setShooterPower(double power) {
     shooterMotor1.set(-power);

@@ -16,7 +16,7 @@ public class Serializer extends SubsystemBase{
 
         lSerializer.setSmartCurrentLimit(35);
 
-        rSerializer.setInverted(false);
+        rSerializer.setInverted(true);
     }
 
     private void setSerializerPower(double power) {
@@ -25,11 +25,11 @@ public class Serializer extends SubsystemBase{
     }
 
     public void serializeBalls() {
-        setSerializerPower(-IntakeConstants.kSerializerPower);
+        setSerializerPower(IntakeConstants.kSerializerPower);
     }
 
     public void unCerealBalls() {
-        setSerializerPower(IntakeConstants.kSerializerPower);
+        setSerializerPower(-IntakeConstants.kSerializerPower);
     }
     public void disable() {
         setSerializerPower(0);
