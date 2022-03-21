@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import com.revrobotics.*;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.Constants.ClimberConstants;
 
 
@@ -14,6 +15,9 @@ public class Climber {
     
     private RelativeEncoder climberEncoder;
     private RelativeEncoder highEncoder; 
+    
+    private int maxHeight = 0;
+    private int kMinHeight = 0;
 
     public Climber(){
         lClimberMotor = new CANSparkMax(ClimberConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -38,6 +42,7 @@ public class Climber {
 
         climberEncoder.setPosition(0);
         highEncoder.setPosition(0);
+
     }
 
     public void climberUp(){
@@ -53,11 +58,11 @@ public class Climber {
     }
 
     public void highUp(){
-        lHighMotor.set(0.75);
+        lHighMotor.set(0.5);
     }
 
     public void highDown(){
-        lHighMotor.set(0.75);
+        lHighMotor.set(-0.5);
     }
 
     public void highDisable(){
@@ -76,4 +81,9 @@ public class Climber {
         lClimberMotor.set(0);
         lHighMotor.set(0);
     }
+
+    public void periodic(){
+        SmartDashboard.putNumber("Climber Encoder", climberEncoder.getPosition());
+    }
+
 }
