@@ -10,6 +10,7 @@ import frc.robot.commands.Index.AutoShotMid;
 import frc.robot.commands.Intake.AutoIntake;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.*;
+import frc.robot.commands.drivetrain.CustomAlignToTarget;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.commands.shooter.TeleOpShooter.*;
 import frc.robot.subsystems.*;
@@ -19,13 +20,13 @@ import java.util.List;
 
 public class FourBallAuto extends SequentialCommandGroup {
 
-	public FourBallAuto(Drivetrain drivetrain, Shooter shooter, Intake intake, Serializer serializer, Tower tower) {
+	public FourBallAuto(Drivetrain drivetrain, Shooter shooter, Intake intake, Serializer serializer, Tower tower, Limelight limelight) {
 		CustomRamseteCommand splineToBallOne =
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
-					new Pose2d(Units.feetToMeters(30.7), Units.feetToMeters(11.2), Rotation2d.fromDegrees(-22)),
-					new Pose2d(Units.feetToMeters(37.0), Units.feetToMeters(7.2), Rotation2d.fromDegrees(-32))
+					new Pose2d(Units.feetToMeters(24.5), Units.feetToMeters(5.7), Rotation2d.fromDegrees(180)),
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-170))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
@@ -33,17 +34,18 @@ public class FourBallAuto extends SequentialCommandGroup {
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
-					new Pose2d(Units.feetToMeters(37.0), Units.feetToMeters(7.2), Rotation2d.fromDegrees(-32)),
-					new Pose2d(Units.feetToMeters(49.5), Units.feetToMeters(22.2), Rotation2d.fromDegrees(45))
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-170)),
+					new Pose2d(Units.feetToMeters(4.3), Units.feetToMeters(4.6), Rotation2d.fromDegrees(-135))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
+			
 		CustomRamseteCommand splineToShot =
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
-					new Pose2d(Units.feetToMeters(49.5), Units.feetToMeters(22.2), Rotation2d.fromDegrees(45)),
-					new Pose2d(Units.feetToMeters(38.1), Units.feetToMeters(18.2), Rotation2d.fromDegrees(-155))
+					new Pose2d(Units.feetToMeters(4.3), Units.feetToMeters(4.6), Rotation2d.fromDegrees(-135)),
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-170))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), true
 			);
@@ -51,30 +53,32 @@ public class FourBallAuto extends SequentialCommandGroup {
 			sequence(
 				//reset odometry
 				new InstantCommand(() -> drivetrain.resetOdometry(splineToBallOne.getInitialPose())),
-
+				//Run intake and vove to first ball
 				deadline(
-					//Run intake and vove to first ball
 					splineToBallOne,
 					new AutoIntake(intake, tower, serializer)
 
 				),
+				//Align and Shoot
+				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(1.5),
+				new AutoShotMid(shooter, tower, serializer).withTimeout(2),
+				//Run intake and move to Human Player
 				deadline(
-					//Run shooter for 0.5s
-					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
-				),
-				deadline(
-					//Run intake and move to Human Player
 					splineToHuman,
-					new AutoIntake(intake, tower, serializer).withTimeout(2)
+					new AutoIntake(intake, tower, serializer)
 				),
+				//Pause and Intake
 				deadline(
-					//Move to shooting position
+					new AutoIntake(intake, tower, serializer).withTimeout(3)
+				),
+				//Spline to Shooting Position
+				deadline(
 					splineToShot
 				),
-				deadline(
-					//Run shooter for 0.5s
-					new AutoShotMid(shooter, tower, serializer).withTimeout(.5)
-				)
+				//Align and Shoot
+				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(1.5),
+				new AutoShotMid(shooter, tower, serializer).withTimeout(2)
+				
 			)
 
 		);

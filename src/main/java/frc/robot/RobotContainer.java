@@ -140,7 +140,7 @@ public class RobotContainer {
 	}
 
 	public Command getTwoBallAuto() {
-		return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower);
+		return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
 	}
 
 	public Command getOneBallAuto(){

@@ -35,6 +35,8 @@ public class Robot extends TimedRobot {
 
 		autoChooser.setDefaultOption("One Ball", robotContainer.getOneBallAuto());
 		autoChooser.addOption("Two Ball", robotContainer.getTwoBallAuto());
+		autoChooser.setDefaultOption("Four Ball", robotContainer.getFourBallAuto());
+		
 		autoChooser.addOption("Do Nothing", robotContainer.getNothingAuto());
 
 		SmartDashboard.putData("Auto Picker", autoChooser);
