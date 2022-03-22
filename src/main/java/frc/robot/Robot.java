@@ -36,9 +36,9 @@ public class Robot extends TimedRobot {
 		autoChooser.setDefaultOption("Do Nothing", robotContainer.getNothingAuto());
 		autoChooser.addOption("Spline Test", robotContainer.getSplineAuto());
 
-		autoChooser.addOption("Five Ball", robotContainer.getFiveBallAuto());
-		autoChooser.addOption("Four Ball", robotContainer.getFourBallAuto());
-		autoChooser.addOption("Two Ball", robotContainer.getTwoBallAuto());
+		// autoChooser.addOption("Five Ball", robotContainer.getFiveBallAuto());
+		// autoChooser.addOption("Four Ball", robotContainer.getFourBallAuto());
+		// autoChooser.addOption("Two Ball", robotContainer.getTwoBallAuto());
 
 		SmartDashboard.putData("Auto Picker", autoChooser);
 	}

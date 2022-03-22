@@ -9,12 +9,11 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
-import frc.robot.commands.Index.Shot;
-import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
+import frc.robot.commands.drivetrain.AlignToTarget;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
 import frc.robot.subsystems.Drivetrain;
@@ -26,10 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.*;
 
 //import autos
-import frc.robot.commands.auto.SplineTest;
-import frc.robot.commands.auto.FiveBallAuto;
-import frc.robot.commands.auto.FourBallAuto;
-import frc.robot.commands.auto.TwoBallAuto;
+import frc.robot.commands.auto.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -52,15 +48,15 @@ public class RobotContainer {
 
 	//private JoystickButton driverAButton = new JoystickButton(driverStick, 1);
 	//private JoystickButton driverBButton = new JoystickButton(driverStick, 2);
-	//private JoystickButton driverLeftShoulder = new JoystickButton(driverStick, 5);
+	private JoystickButton driverRightBumper = new JoystickButton(driverStick, 6);
 
 	private JoystickButton operatorAButton = new JoystickButton(operatorStick, 1);
 	private JoystickButton operatorBButton = new JoystickButton(operatorStick, 2);
 	private JoystickButton operatorLeftBumper = new JoystickButton(operatorStick, 5);
 	private JoystickButton operatorRightBumper = new JoystickButton(operatorStick, 6);
 	private JoystickButton operatorYButton = new JoystickButton(operatorStick, 4);
-	// private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
-	// private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
+	private JoystickButton operatorXButton = new JoystickButton(operatorStick, 3);
+	private JoystickButton operatorUnrestrictedShooting = new JoystickButton(operatorStick, 8);
 	private POVButton operatorDPadUp = new POVButton(operatorStick, 0);
 	private POVButton operatorDPadLeft = new POVButton(operatorStick, 90);
 	private POVButton operatorDPadDown = new POVButton(operatorStick, 180);
@@ -86,26 +82,25 @@ public class RobotContainer {
 	 */
 	private void configureButtonBindings() {
 
+		//autoalign
+		driverRightBumper.whileHeld(new AlignToTarget(drivetrain, limelight, false));
+
 		//Extend and Contract Climber
-			//Mid Rung
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
 		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
-			//High Rung
-		operatorDPadRight.whileHeld(new MoveClimber(climber, ClimberMotionType.REACH));
 		operatorDPadLeft.whileHeld(new MoveClimber(climber, ClimberMotionType.RECOIL));
+		operatorDPadRight.whileHeld(new MoveClimber(climber, ClimberMotionType.REACH));
 
 		//Intake and extake 
 		operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer, tower));
 		operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer, tower));
-		operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE, serializer, shooter));
 		
 		//Starting and Stoping the Shooter
-		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
-		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
-		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
+		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE, tower, serializer));
+		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID, tower, serializer));
+		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR, tower, serializer));
+		
 
-		//Shot
-		operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT, serializer, shooter));
 	}
 
 	/*
@@ -117,20 +112,30 @@ public class RobotContainer {
 	public Command getNothingAuto() {
 		return new InstantCommand(() -> drivetrain.tankDriveVolts(0, 0));
 	}
-
 	public Command getSplineAuto() {
 		return new SplineTest(drivetrain);
 	}
 
-	public Command getFiveBallAuto() {
-		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
-	}
+	//Five Ball Autos
+	// public Command getFiveBallAuto() {
+	// 	return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
+	// }
 
-	public Command getFourBallAuto() {
-		return new FourBallAuto(drivetrain, shooter, intake, serializer, tower);
-	}
+	//Four Ball Autos
+	// public Command getFourBallAuto() {
+	// 	return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	// }
+	// public Command getFourBallAutoMid() {
+	// 	return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	// }
 
-	public Command getTwoBallAuto() {
-		return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower);
-	}
+	//Two Ball Autos
+	// public Command getTwoBallAuto() {
+	// 	return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	// }
+
+	// //One Ball Auto
+	// public Command getOneBallAuto(){
+	// 	return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
+	// }
 }

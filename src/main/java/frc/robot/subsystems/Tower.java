@@ -43,7 +43,7 @@ public class Tower {
 
     public void breakBeamTower(){
         if(isStored()){
-            setBothTowerPower(.5);
+            setBothTowerPower(.25);
         }else{
             setBothTowerPower(0);
         }

@@ -46,11 +46,11 @@ public class Climber {
     }
 
     public void climberUp(){
-        lClimberMotor.set(-0.75);
+        lClimberMotor.set(-0.25);
     }
 
     public void climberDown(){
-        lClimberMotor.set(0.75);
+        lClimberMotor.set(0.25);
     }
 
     public void climbDisable() {
@@ -58,11 +58,11 @@ public class Climber {
     }
 
     public void highUp(){
-        lHighMotor.set(0.5);
+        lHighMotor.set(0.25);
     }
 
     public void highDown(){
-        lHighMotor.set(-0.5);
+        lHighMotor.set(-0.25);
     }
 
     public void highDisable(){
@@ -84,6 +84,7 @@ public class Climber {
 
     public void periodic(){
         SmartDashboard.putNumber("Climber Encoder", climberEncoder.getPosition());
+        SmartDashboard.putNumber("High Climb Encoder", highEncoder.getPosition());
     }
 
 }
