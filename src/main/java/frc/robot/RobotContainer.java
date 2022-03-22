@@ -28,11 +28,7 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.subsystems.*;
 
 //import autos
-import frc.robot.commands.auto.SplineTest;
-import frc.robot.commands.auto.FiveBallAuto;
-import frc.robot.commands.auto.FourBallAuto;
-import frc.robot.commands.auto.OneBallAuto;
-import frc.robot.commands.auto.TwoBallAuto;
+import frc.robot.commands.auto.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
