@@ -116,30 +116,6 @@ public class RobotContainer {
 		return new SplineTest(drivetrain);
 	}
 
-<<<<<<< HEAD
-	//Five Ball Autos
-	// public Command getFiveBallAuto() {
-	// 	return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
-	// }
-
-	//Four Ball Autos
-	// public Command getFourBallAuto() {
-	// 	return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
-	// }
-	// public Command getFourBallAutoMid() {
-	// 	return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
-	// }
-
-	//Two Ball Autos
-	// public Command getTwoBallAuto() {
-	// 	return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
-	// }
-
-	// //One Ball Auto
-	// public Command getOneBallAuto(){
-	// 	return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
-	// }
-=======
 	public Command getFiveBallAuto() {
 		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
 	}
@@ -155,5 +131,4 @@ public class RobotContainer {
 	public Command getOneBallAuto(){
 		return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
 	}
->>>>>>> irving
 }

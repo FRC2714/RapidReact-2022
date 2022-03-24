@@ -110,15 +110,9 @@ public class Shooter extends SubsystemBase {
     shooterPID.setReference(0, CANSparkMax.ControlType.kVelocity);
     shooterMotor1.set(0);
   }
-<<<<<<< HEAD
+  
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter RPM", getVelocity());
-=======
-
-  @Override
-  public void periodic() {
-    SmartDashboard.putNumber("Shooter RPM", shooterEncoder.getVelocity());
->>>>>>> irving
   }
 }
