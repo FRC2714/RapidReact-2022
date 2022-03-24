@@ -58,18 +58,18 @@ public final class Constants {
 
     public static final class IntakeConstants {
         public static int kIntakeMotorPort = 15;
-        public static int kLSerializerPort = 12;
-        public static int kRSerializerPort = 11;
+        public static int kLSerializerPort = 11;
+        public static int kRSerializerPort = 12;
 
         public static double kIntakePower = 0.6; // was 1.0
         public static double kSerializerPower = 0.5; //was 0.6
     }
 
     public static final class ShooterConstants {
-        public static double kSparkMaxP = 0.00002;
+        public static double kSparkMaxP = 0.000035;
         public static double KSparkMaxI = 0;
         public static double KSparkMaxD = 0;
-        public static double kSparkMaxFeedforward = 0.000173; // .00022
+        public static double kSparkMaxFeedforward = 0.000185; // .00022
 
        
 
@@ -77,13 +77,13 @@ public final class Constants {
         public static int kRightMotorPort = 10;
 
 
-        public static double kVelocityTolerance = 120;
+        public static double kVelocityTolerance = 100;
     }
 
     public static final class IndexConstants {
 
-        public static int kiTowerPort = 8;
-        public static int koTowerPort = 7;
+        public static int kiTowerPort = 7;
+        public static int koTowerPort = 8;
     }
     public static final class CameraConstants {
         public static double kCameraHeight = Units.inchesToMeters(27); 
@@ -111,8 +111,11 @@ public final class Constants {
         public static double servoLockPosition = 1;
         public static double servoUnlockPosition = -1;
 
-        public static int kLeftMotorPort = 13;
-        public static int kRightMotorPort = 14;
+        public static int kLeftMotorPort = 18;
+        public static int kRightMotorPort = 19;
+
+        public static int kLHighMotorPort = 16;
+        public static int kRHighMotorPort = 17;
     }
 
     public static final class AutoConstants {

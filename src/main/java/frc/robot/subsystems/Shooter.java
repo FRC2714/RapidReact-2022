@@ -29,9 +29,9 @@ public class Shooter extends SubsystemBase {
   private double targetRPM = 0.0;
   private double incrementRPM = 0.0;
 
-  private double closeShotRPM = 2500;
-  private double midShotRPM = 4300;
-  private double longShotRPM = 8000;
+  private double closeShotRPM = 3100;
+  private double midShotRPM = 3200;
+  private double longShotRPM = 3800;
 
   public Shooter(Limelight limelight) {
     this.limelight = limelight;
@@ -110,9 +110,15 @@ public class Shooter extends SubsystemBase {
     shooterPID.setReference(0, CANSparkMax.ControlType.kVelocity);
     shooterMotor1.set(0);
   }
+<<<<<<< HEAD
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Shooter RPM", getVelocity());
+=======
 
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter RPM", shooterEncoder.getVelocity());
+>>>>>>> irving
   }
 }

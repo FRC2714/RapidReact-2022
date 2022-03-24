@@ -16,11 +16,11 @@ public class Serializer extends SubsystemBase{
 
         lSerializer.setSmartCurrentLimit(35);
 
-        rSerializer.setInverted(true);
+
     }
 
     private void setSerializerPower(double power) {
-        lSerializer.set(power);
+        lSerializer.set(-power);
         rSerializer.set(power);
     }
 
@@ -34,4 +34,5 @@ public class Serializer extends SubsystemBase{
     public void disable() {
         setSerializerPower(0);
     }
+
 }

@@ -9,13 +9,10 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 
-import frc.robot.commands.Index.Shot;
-import frc.robot.commands.Index.Shot.IndexType;
 import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
-import frc.robot.commands.drivetrain.AlignToTarget;
 import frc.robot.commands.drivetrain.CustomAlignToTarget;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
@@ -91,26 +88,19 @@ public class RobotContainer {
 		//Extend and Contract Climber
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
 		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
+		operatorDPadLeft.whileHeld(new MoveClimber(climber, ClimberMotionType.RECOIL));
+		operatorDPadRight.whileHeld(new MoveClimber(climber, ClimberMotionType.REACH));
 
 		//Intake and extake 
 		operatorRightBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.INTAKE, serializer, tower));
 		operatorLeftBumper.whileActiveContinuous(new IntakeCommand(intake, IntakeType.EXTAKE, serializer, tower));
-		operatorLeftBumper.whileHeld(new Shot(tower, IndexType.EXTAKE, serializer, shooter));
+		
 		//Starting and Stoping the Shooter
-		// operatorAButton.whenPressed(new TeleOpShooter(shooter, 0).execute(ShooterType.CLOSE));
-		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE));
-		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID));
-		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR));
+		operatorAButton.whileHeld(new TeleOpShooter(shooter, ShooterType.CLOSE, tower, serializer));
+		operatorBButton.whileHeld(new TeleOpShooter(shooter, ShooterType.MID, tower, serializer));
+		operatorYButton.whileHeld(new TeleOpShooter(shooter, ShooterType.FAR, tower, serializer));
 		
 
-		//Shot
-		operatorRightTrigger.whileActiveContinuous(new Shot(tower, IndexType.SHOT, serializer, shooter));
-
-		//Extend and Contract Climber
-		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
-		operatorDPadDown.whileHeld(new MoveClimber(climber, ClimberMotionType.RETRACT));
-
-		//AlignToTarget added here when complete
 	}
 
 	/*
@@ -122,11 +112,34 @@ public class RobotContainer {
 	public Command getNothingAuto() {
 		return new InstantCommand(() -> drivetrain.tankDriveVolts(0, 0));
 	}
-
 	public Command getSplineAuto() {
 		return new SplineTest(drivetrain);
 	}
 
+<<<<<<< HEAD
+	//Five Ball Autos
+	// public Command getFiveBallAuto() {
+	// 	return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
+	// }
+
+	//Four Ball Autos
+	// public Command getFourBallAuto() {
+	// 	return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	// }
+	// public Command getFourBallAutoMid() {
+	// 	return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	// }
+
+	//Two Ball Autos
+	// public Command getTwoBallAuto() {
+	// 	return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	// }
+
+	// //One Ball Auto
+	// public Command getOneBallAuto(){
+	// 	return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
+	// }
+=======
 	public Command getFiveBallAuto() {
 		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
 	}
@@ -142,4 +155,5 @@ public class RobotContainer {
 	public Command getOneBallAuto(){
 		return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
 	}
+>>>>>>> irving
 }

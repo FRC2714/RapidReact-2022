@@ -27,8 +27,8 @@ public class Tower extends SubsystemBase {
         innerTower.setSmartCurrentLimit(30);
         outerTower.setSmartCurrentLimit(30);
 
-        innerTower.setInverted(false);
-        outerTower.setInverted(true);
+        innerTower.setInverted(true);
+        outerTower.setInverted(false);
 
         innerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
         outerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
@@ -45,10 +45,8 @@ public class Tower extends SubsystemBase {
 
     public void breakBeamTower(){
         if(isStored()){
-            System.out.println("Stored ball running 0.5");
-            setBothTowerPower(.5);
+            setBothTowerPower(.25);
         }else{
-            System.out.println("Stored ball running 0");
             setBothTowerPower(0);
         }
     }

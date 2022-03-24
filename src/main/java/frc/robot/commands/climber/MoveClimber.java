@@ -16,12 +16,20 @@ public class MoveClimber extends CommandBase {
     public void execute(){
         switch(ClimberMotionType){
             case EXTEND:
-            climber.climberDown();
+            climber.climberUp();
             System.out.println("Climbing Up");
             break; 
             case RETRACT:
-            climber.climberUp();
+            climber.climberDown();
             System.out.println("Climbing Down");
+            break;
+            case REACH:
+            climber.highUp();
+            System.out.println("Reaching Out");
+            break;
+            case RECOIL:
+            climber.highDown();
+            System.out.println("Pulling Away");
             break;
         }
 
@@ -35,6 +43,8 @@ public class MoveClimber extends CommandBase {
 
     public enum ClimberMotionType{
         EXTEND,
-        RETRACT
+        RETRACT,
+        REACH,
+        RECOIL
     }
 }
