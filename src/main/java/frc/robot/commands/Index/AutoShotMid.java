@@ -27,7 +27,6 @@ public class AutoShotMid extends CommandBase{
             serializer.disable();
         }
     }   
-
     @Override
     public void end(boolean interrupted){
         shooter.disable();

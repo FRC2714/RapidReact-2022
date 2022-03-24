@@ -33,12 +33,11 @@ public class Robot extends TimedRobot {
 		robotContainer = new RobotContainer();
 		autoChooser = new SendableChooser<>();
 
-		autoChooser.setDefaultOption("Do Nothing", robotContainer.getNothingAuto());
-		autoChooser.addOption("Spline Test", robotContainer.getSplineAuto());
-
-		// autoChooser.addOption("Five Ball", robotContainer.getFiveBallAuto());
-		// autoChooser.addOption("Four Ball", robotContainer.getFourBallAuto());
-		// autoChooser.addOption("Two Ball", robotContainer.getTwoBallAuto());
+		autoChooser.setDefaultOption("One Ball", robotContainer.getOneBallAuto());
+		autoChooser.addOption("Two Ball", robotContainer.getTwoBallAuto());
+		autoChooser.setDefaultOption("Four Ball", robotContainer.getFourBallAuto());
+		
+		autoChooser.addOption("Do Nothing", robotContainer.getNothingAuto());
 
 		SmartDashboard.putData("Auto Picker", autoChooser);
 	}

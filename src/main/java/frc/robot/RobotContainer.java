@@ -13,6 +13,7 @@ import frc.robot.commands.Intake.IntakeCommand;
 import frc.robot.commands.Intake.IntakeCommand.IntakeType;
 import frc.robot.commands.climber.MoveClimber;
 import frc.robot.commands.climber.MoveClimber.ClimberMotionType;
+import frc.robot.commands.drivetrain.CustomAlignToTarget;
 import frc.robot.commands.shooter.TeleOpShooter;
 import frc.robot.commands.shooter.TeleOpShooter.ShooterType;
 import frc.robot.subsystems.Drivetrain;
@@ -82,6 +83,7 @@ public class RobotContainer {
 	private void configureButtonBindings() {
 
 		//autoalign
+		driverRightBumper.whileHeld(new CustomAlignToTarget(drivetrain, limelight, false));
 
 		//Extend and Contract Climber
 		operatorDPadUp.whileHeld(new MoveClimber(climber, ClimberMotionType.EXTEND));
@@ -114,6 +116,7 @@ public class RobotContainer {
 		return new SplineTest(drivetrain);
 	}
 
+<<<<<<< HEAD
 	//Five Ball Autos
 	// public Command getFiveBallAuto() {
 	// 	return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
@@ -136,4 +139,21 @@ public class RobotContainer {
 	// public Command getOneBallAuto(){
 	// 	return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
 	// }
+=======
+	public Command getFiveBallAuto() {
+		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
+	}
+
+	public Command getFourBallAuto() {
+		return new FourBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	}
+
+	public Command getTwoBallAuto() {
+		return new TwoBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
+	}
+
+	public Command getOneBallAuto(){
+		return new OneBallAuto(drivetrain, shooter, intake, serializer, tower);
+	}
+>>>>>>> irving
 }

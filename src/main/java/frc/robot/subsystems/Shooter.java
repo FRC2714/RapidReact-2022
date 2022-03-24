@@ -52,18 +52,18 @@ public class Shooter extends SubsystemBase {
     shooterPID.setI(ShooterConstants.KSparkMaxI);
     shooterPID.setD(ShooterConstants.KSparkMaxD);
 
-    populateVelocityMap();
+    // populateVelocityMap();
   }
 
-  public void populateVelocityMap() {
-    shooterVelocity.put(6.8, 2200.0);
-    shooterVelocity.put(11.1, 2050.0);
-    shooterVelocity.put(14.3, 2100.0);
-    shooterVelocity.put(22.0, 2350.0);
-    shooterVelocity.put(26.75, 2650.0);
-    shooterVelocity.put(36.0, 3500.0);
+  // public void populateVelocityMap() {
+  //   shooterVelocity.put(6.8, 2200.0);
+  //   shooterVelocity.put(11.1, 2050.0);
+  //   shooterVelocity.put(14.3, 2100.0);
+  //   shooterVelocity.put(22.0, 2350.0);
+  //   shooterVelocity.put(26.75, 2650.0);
+  //   shooterVelocity.put(36.0, 3500.0);
 
-  }
+  // }
 
   public void setShooterPower(double power) {
     shooterMotor1.set(-power);
@@ -110,8 +110,15 @@ public class Shooter extends SubsystemBase {
     shooterPID.setReference(0, CANSparkMax.ControlType.kVelocity);
     shooterMotor1.set(0);
   }
+<<<<<<< HEAD
   @Override
   public void periodic() {
     SmartDashboard.putNumber("Shooter RPM", getVelocity());
+=======
+
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Shooter RPM", shooterEncoder.getVelocity());
+>>>>>>> irving
   }
 }

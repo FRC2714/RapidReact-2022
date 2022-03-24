@@ -4,10 +4,12 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 import edu.wpi.first.wpilibj.DigitalInput;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.*;
 import frc.robot.utils.ToggledBreakBeam;
 
-public class Tower {
+public class Tower extends SubsystemBase {
     public CANSparkMax innerTower;
     public CANSparkMax outerTower;
     
@@ -51,6 +53,10 @@ public class Tower {
 
     public void disable() {
         setBothTowerPower(0);
+    }
+
+    public void periodic(){
+        SmartDashboard.putBoolean("Breakbeam", indexBeam.getState());
     }
 
     public boolean isStored(){

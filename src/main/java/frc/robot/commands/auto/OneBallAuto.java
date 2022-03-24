@@ -7,16 +7,15 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Index.AutoShotMid;
 import frc.robot.commands.Intake.AutoIntake;
-import frc.robot.commands.drivetrain.CustomAlignToTarget;
 import frc.robot.subsystems.*;
 import frc.robot.utils.*;
 
 import java.util.List;
 
-public class TwoBallAuto extends SequentialCommandGroup {
+public class OneBallAuto extends SequentialCommandGroup {
 
-	public TwoBallAuto(Drivetrain drivetrain, Shooter shooter, Intake intake, Serializer serializer, Tower tower, Limelight limelight) {
-		CustomRamseteCommand splineToBallOne =
+	public OneBallAuto(Drivetrain drivetrain, Shooter shooter, Intake intake, Serializer serializer, Tower tower) {
+		CustomRamseteCommand splineToOut =
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
@@ -29,20 +28,9 @@ public class TwoBallAuto extends SequentialCommandGroup {
 		addCommands(
 			sequence(
 				//reset odometry
-				new InstantCommand(() -> drivetrain.resetOdometry(splineToBallOne.getInitialPose())),
-
-				deadline(
-					//Run intake and vove to first ball
-					splineToBallOne,
-					new AutoIntake(intake, tower, serializer)
-				),
-				deadline(
-					//Run Limelight
-					new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(4),
-
-					//Run shooter for 0.5s
-					new AutoShotMid(shooter, tower, serializer)
-				)
+				new InstantCommand(() -> drivetrain.resetOdometry(splineToOut.getInitialPose())),
+				new AutoShotMid(shooter, tower, serializer).withTimeout(5),
+				splineToOut
 			)
 
 		);
