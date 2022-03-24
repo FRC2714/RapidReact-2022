@@ -117,7 +117,7 @@ public class RobotContainer {
 	}
 
 	public Command getFiveBallAuto() {
-		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower);
+		return new FiveBallAuto(drivetrain, shooter, intake, serializer, tower, limelight);
 	}
 
 	public Command getFourBallAuto() {
