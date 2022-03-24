@@ -25,8 +25,8 @@ public class Tower {
         innerTower.setSmartCurrentLimit(30);
         outerTower.setSmartCurrentLimit(30);
 
-        innerTower.setInverted(false);
-        outerTower.setInverted(true);
+        innerTower.setInverted(true);
+        outerTower.setInverted(false);
 
         innerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);
         outerTower.setIdleMode(CANSparkMax.IdleMode.kBrake);

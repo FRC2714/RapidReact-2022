@@ -28,11 +28,11 @@ public class Climber {
         highEncoder = lHighMotor.getEncoder();
 
         lClimberMotor.setSmartCurrentLimit(30);
-        lHighMotor.setSmartCurrentLimit(30);
+        lHighMotor.setSmartCurrentLimit(60);
+        rHighMotor.setSmartCurrentLimit(60);
 
     
         rClimberMotor.follow(lClimberMotor, true);
-        rHighMotor.follow(lHighMotor, true);
 
         lClimberMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
         rClimberMotor.setIdleMode(CANSparkMax.IdleMode.kBrake);
@@ -46,11 +46,11 @@ public class Climber {
     }
 
     public void climberUp(){
-        lClimberMotor.set(-0.25);
+        lClimberMotor.set(-0.5);
     }
 
     public void climberDown(){
-        lClimberMotor.set(0.25);
+        lClimberMotor.set(0.5);
     }
 
     public void climbDisable() {
@@ -58,11 +58,13 @@ public class Climber {
     }
 
     public void highUp(){
-        lHighMotor.set(0.25);
+        lHighMotor.set(-1);
+        rHighMotor.set(1);
     }
 
     public void highDown(){
-        lHighMotor.set(-0.25);
+        lHighMotor.set(1);
+        rHighMotor.set(-1);
     }
 
     public void highDisable(){
@@ -80,6 +82,7 @@ public class Climber {
     public void disable(){
         lClimberMotor.set(0);
         lHighMotor.set(0);
+        rHighMotor.set(0);
     }
 
     public void periodic(){

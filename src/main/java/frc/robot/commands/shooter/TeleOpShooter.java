@@ -76,6 +76,8 @@ public class TeleOpShooter extends CommandBase {
     public void end(boolean interrupted) {
         shooter.setShooterPower(0);
         shooter.disable();
+        tower.disable();
+        serializer.disable();
         SmartDashboard.putNumber("Current Output 1", 0);
         SmartDashboard.putNumber("Current Output 2", 0);
         System.out.println("Shooter Disabled");
