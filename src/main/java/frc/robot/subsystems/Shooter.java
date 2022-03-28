@@ -14,8 +14,6 @@ import frc.robot.Constants.ShooterConstants;
 import frc.robot.utils.InterpolatingTreeMap;
 import edu.wpi.first.wpilibj.smartdashboard.*;
 
-
-
 public class Shooter extends SubsystemBase {
   public CANSparkMax shooterMotor1;
   public CANSparkMax shooterMotor2;
@@ -31,18 +29,20 @@ public class Shooter extends SubsystemBase {
   private double targetRPM = 0.0;
   private double incrementRPM = 0.0;
 
-  public Shooter(Limelight limelight){
+  private double closeShotRPM = 3100;
+  private double midShotRPM = 3200;
+  private double longShotRPM = 3800;
+
+  public Shooter(Limelight limelight) {
     this.limelight = limelight;
 
     shooterMotor1 = new CANSparkMax(ShooterConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
     shooterMotor2 = new CANSparkMax(ShooterConstants.kRightMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
-    
+
     shooterMotor1.setSmartCurrentLimit(60);
     shooterMotor2.setSmartCurrentLimit(60);
-    
 
     shooterEncoder = shooterMotor1.getEncoder();
-
 
     shooterMotor2.follow(shooterMotor1, true);
 
@@ -51,27 +51,27 @@ public class Shooter extends SubsystemBase {
     shooterPID.setP(ShooterConstants.kSparkMaxP);
     shooterPID.setI(ShooterConstants.KSparkMaxI);
     shooterPID.setD(ShooterConstants.KSparkMaxD);
-    
 
-    populateVelocityMap();
-  }
-  
-  public void populateVelocityMap(){
-    shooterVelocity.put(6.8, 2200.0);
-    shooterVelocity.put(11.1, 2050.0);
-    shooterVelocity.put(14.3, 2100.0);
-    shooterVelocity.put(22.0, 2350.0);
-    shooterVelocity.put(26.75, 2650.0);
-    shooterVelocity.put(36.0, 3500.0);
-
+    // populateVelocityMap();
   }
 
-  public void setShooterPower(double power){
+  // public void populateVelocityMap() {
+  //   shooterVelocity.put(6.8, 2200.0);
+  //   shooterVelocity.put(11.1, 2050.0);
+  //   shooterVelocity.put(14.3, 2100.0);
+  //   shooterVelocity.put(22.0, 2350.0);
+  //   shooterVelocity.put(26.75, 2650.0);
+  //   shooterVelocity.put(36.0, 3500.0);
+
+  // }
+
+  public void setShooterPower(double power) {
     shooterMotor1.set(-power);
-}
+  }
 
   public void setTargetRpm(double targetRPM) {
     this.targetRPM = targetRPM;
+    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
 
   public double getVelocity() { // in rpm
@@ -79,35 +79,40 @@ public class Shooter extends SubsystemBase {
   }
 
   public double getTargetRpm() {
-    return limelight.targetVisible() ? shooterVelocity.getInterpolated(Units.metersToFeet(limelight.getDistanceToGoal())) + incrementRPM: defaultRPM;
+    return limelight.targetVisible()
+        ? shooterVelocity.getInterpolated(Units.metersToFeet(limelight.getDistanceToGoal())) + incrementRPM
+        : defaultRPM;
   }
 
   public void setDynamicRpm() {
     shooterPID.setReference(getTargetRpm(), ControlType.kVelocity);
     setTargetRpm(getTargetRpm());
-}
+  }
 
-public boolean atSetpoint() {
-    return Math.abs(targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
-}
+  public boolean atSetpoint() {
+    return Math.abs(-targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
+  }
 
-  public void closeShot(){
-    setTargetRpm(1400);
-    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+  public void closeShot() {
+    setTargetRpm(closeShotRPM);
   }
 
   public void midShot() {
-    setTargetRpm(2100);
-    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+    setTargetRpm(midShotRPM);
   }
+
   public void longShot() {
-    setTargetRpm(2750);
-    shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
+    setTargetRpm(longShotRPM);
 
   }
 
-  public void disable(){
+  public void disable() {
     shooterPID.setReference(0, CANSparkMax.ControlType.kVelocity);
     shooterMotor1.set(0);
+  }
+  
+  @Override
+  public void periodic() {
+    SmartDashboard.putNumber("Shooter RPM", getVelocity());
   }
 }

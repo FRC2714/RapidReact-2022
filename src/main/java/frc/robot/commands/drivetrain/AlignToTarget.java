@@ -1,49 +1,24 @@
 package frc.robot.commands.drivetrain;
 
-import java.util.function.DoubleSupplier;
 
-import edu.wpi.first.math.controller.ProfiledPIDController;
-import edu.wpi.first.math.trajectory.TrapezoidProfile;
-import edu.wpi.first.wpilibj2.command.ProfiledPIDCommand;
-import frc.robot.Constants.DriveConstants;
+import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.Limelight;
 
-public class AlignToTarget extends ProfiledPIDCommand{
+public class AlignToTarget extends CommandBase{
  
-    private static Drivetrain drive;
     private Limelight limelight;
     private Drivetrain drivetrain;
-    private boolean isAutoEnabled = false;
 
-    
 
+    private double tolerance = 0.2;
+
+    private double kP = 1;
+    private double maxOffset = 29;
 
     public AlignToTarget(Drivetrain drivetrain, Limelight limelight){
-        this(limelight, drivetrain, null);
-    }
-    
-    public AlignToTarget(Drivetrain drivetrain, Limelight limelight, boolean isAutoEnabled){
-        this(drivetrain, limelight);
-        this.isAutoEnabled = isAutoEnabled;
-    }
-
-    public AlignToTarget(Limelight limelight, Drivetrain drivetrain, DoubleSupplier rawY){
-       super(
-            new ProfiledPIDController(DriveConstants.kAlignP, 0, DriveConstants.kAlignD,
-                        new TrapezoidProfile.Constraints(100, 300)),
-            limelight::getXAngleOffset,
-            0,
-            (output, setpoint) -> drive.arcadeDrive(-rawY.getAsDouble(), Math.signum(output) * 0.16),
-            drive
-        );
-        addRequirements(drive);
-
-        this.limelight = limelight;
-        this.drivetrain = drive; 
-        getController().enableContinuousInput(-180, 180);
-
-        getController().setTolerance(.75,4);    
+       this.limelight = limelight;
+       this.drivetrain = drivetrain;
     }
 
     @Override
@@ -52,19 +27,24 @@ public class AlignToTarget extends ProfiledPIDCommand{
     }
 
     @Override
-    public boolean isFinished() {
-        if(isAutoEnabled)
-            return
-                getController().atGoal() || !limelight.targetVisible();
-        else
-            return false;
+    public void execute() {
+        double angleOffset = limelight.getXAngleOffset();
+        
+        double power = angleOffset * (kP/maxOffset);
 
+        if (Math.abs(angleOffset) > tolerance) {
+
+            if(power > 0.7) power = 0.3;
+            if(power < -0.7) power = -0.3;
+            
+            drivetrain.arcadeDrive(0, -power);
+            
+        }
     }
+
+
     @Override
     public void end(boolean interrupted){
         drivetrain.tankDriveVolts(0, 0);
-
-        if(!isAutoEnabled)
-            limelight.setLED(false);
     }
 }
