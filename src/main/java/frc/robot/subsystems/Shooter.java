@@ -29,9 +29,9 @@ public class Shooter extends SubsystemBase {
   private double targetRPM = 0.0;
   private double incrementRPM = 0.0;
 
-  private double closeShotRPM = 3100;
-  private double midShotRPM = 3200;
-  private double longShotRPM = 3800;
+  private double closeShotRPM = 2500;
+  private double midShotRPM = 2900;
+  private double longShotRPM = 3350;
 
   public Shooter(Limelight limelight) {
     this.limelight = limelight;
