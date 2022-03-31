@@ -25,7 +25,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(24.5), Units.feetToMeters(5.7), Rotation2d.fromDegrees(180)),
-					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-170))
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-142))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
@@ -33,7 +33,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
-					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-170)),
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-142)),
 					new Pose2d(Units.feetToMeters(4.3), Units.feetToMeters(4.6), Rotation2d.fromDegrees(-135))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
@@ -44,7 +44,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(4.3), Units.feetToMeters(4.6), Rotation2d.fromDegrees(-135)),
-					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-170))
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-142))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), true
 			);
