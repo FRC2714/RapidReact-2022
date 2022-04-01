@@ -19,6 +19,7 @@
       "/LiveWindow/Limelight": "Subsystem",
       "/LiveWindow/Serializer": "Subsystem",
       "/LiveWindow/Shooter": "Subsystem",
+      "/LiveWindow/Tower": "Subsystem",
       "/LiveWindow/Ungrouped/DifferentialDrive[1]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/DifferentialDrive[2]": "DifferentialDrive",
       "/LiveWindow/Ungrouped/DigitalInput[4]": "Digital Input",
