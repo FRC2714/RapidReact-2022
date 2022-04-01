@@ -46,11 +46,11 @@ public class Climber {
     }
 
     public void climberUp(){
-        lClimberMotor.set(-0.5);
+        lClimberMotor.set(0.5);
     }
 
     public void climberDown(){
-        lClimberMotor.set(0.5);
+        lClimberMotor.set(-0.5);
     }
 
     public void climbDisable() {
