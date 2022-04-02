@@ -25,7 +25,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(24.5), Units.feetToMeters(5.7), Rotation2d.fromDegrees(180)),
-					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-142))
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-143))
 				),
 				Units.feetToMeters(10), Units.feetToMeters(8), false
 			);
@@ -33,10 +33,10 @@ public class FourBallAuto extends SequentialCommandGroup {
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
-					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-142)),
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-143)),
 					new Pose2d(Units.feetToMeters(4.3), Units.feetToMeters(4.6), Rotation2d.fromDegrees(-135))
 				),
-				Units.feetToMeters(13), Units.feetToMeters(10), false
+				Units.feetToMeters(12), Units.feetToMeters(8), false
 			);
 			
 		CustomRamseteCommand splineToShot =
@@ -44,9 +44,9 @@ public class FourBallAuto extends SequentialCommandGroup {
 				drivetrain,
 				List.of(
 					new Pose2d(Units.feetToMeters(4.3), Units.feetToMeters(4.6), Rotation2d.fromDegrees(-135)),
-					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-142))
+					new Pose2d(Units.feetToMeters(16.5), Units.feetToMeters(6.3), Rotation2d.fromDegrees(-150))
 				),
-				Units.feetToMeters(13), Units.feetToMeters(10), true
+				Units.feetToMeters(12), Units.feetToMeters(8), true
 			);
 
 		addCommands(
@@ -60,7 +60,7 @@ public class FourBallAuto extends SequentialCommandGroup {
 
 				),
 				//Align and Shoot
-				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(0.3),
+				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(.25),
 				new AutoShotMid(shooter, tower, serializer).withTimeout(1.5),
 				//Run intake and move to Human Player
 				deadline(
@@ -76,8 +76,8 @@ public class FourBallAuto extends SequentialCommandGroup {
 					splineToShot.andThen(() -> drivetrain.tankDriveVolts(0,0))
 				),
 				//Align and Shoot
-				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(0.3),
-				new AutoShotMid(shooter, tower, serializer).withTimeout(1.5)
+				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(.25),
+				new AutoShotMid(shooter, tower, serializer).withTimeout(2)
 				
 			)
 

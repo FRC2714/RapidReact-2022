@@ -31,13 +31,13 @@ public class Shooter extends SubsystemBase {
   private double incrementRPM = 0.0;
 
   //TELEOP RPM
-  private double closeShotRPM = 2500;
+  private double closeShotRPM = 3750;
   private double midShotRPM = 2900;
-  private double longShotRPM = 3350;
+  private double longShotRPM = 3250;
 
   //AUTO RPM
   private double autoCloseShotRPM = 2500;
-  private double autoMidShotRPM = 3350;
+  private double autoMidShotRPM = 3050;
 
   public Shooter(Limelight limelight) {
     this.limelight = limelight;
