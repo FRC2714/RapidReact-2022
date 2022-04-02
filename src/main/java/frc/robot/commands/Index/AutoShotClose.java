@@ -19,7 +19,7 @@ public class AutoShotClose extends CommandBase {
     public void execute(){
         shooter.autoCloseShot();
         if(shooter.atSetpoint()){
-            tower.setBothTowerPower(0.25);
+            tower.setBothTowerPower(1);
             serializer.serializeBalls();
         }
     }
