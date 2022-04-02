@@ -40,7 +40,7 @@ public final class Constants {
         public static double kAlignP = 0.031;
         public static double kAlignD = 0.0003;
 
-        public static double kDriveP = 3.7568; // 3 stable
+        public static double kDriveP = 3.5; // 3 stable
         public static double kDriveI = 0;
         public static double kDriveD = 0;
 
