@@ -95,7 +95,7 @@ public final class Constants {
     }
 
     public static final class ClimberConstants {
-        public static double kGearRatio = 1.0;
+        public static double kGearRatio = 36.0;
         public static double kSprocketRadius = 1.0; // in
 
         public static double kP = 0.1;
