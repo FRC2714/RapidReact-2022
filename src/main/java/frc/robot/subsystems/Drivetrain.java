@@ -289,7 +289,7 @@ public class Drivetrain extends SubsystemBase {
         setDefaultCommand(new DriverControl(
                 this,
                 () -> joystick.getRawAxis(1),
-                () -> joystick.getRawAxis(4) * .5
+                () -> joystick.getRawAxis(4) * .37
         ));
     }
 
