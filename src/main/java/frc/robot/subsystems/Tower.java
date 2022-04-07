@@ -13,7 +13,7 @@ public class Tower extends SubsystemBase {
     public CANSparkMax innerTower;
     public CANSparkMax outerTower;
     
-    private ToggledBreakBeam indexBeam;
+    private ToggledBreakBeam indexBeam;                                                                                                                                                              
 
     public boolean ballStored = false; 
 

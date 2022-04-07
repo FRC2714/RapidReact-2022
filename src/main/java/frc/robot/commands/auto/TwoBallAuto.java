@@ -20,24 +20,33 @@ public class TwoBallAuto extends SequentialCommandGroup {
 			RamseteGenerator.getRamseteCommand(
 				drivetrain,
 				List.of(
-					new Pose2d(Units.feetToMeters(19.4), Units.feetToMeters(16.9), Rotation2d.fromDegrees(135)),
-					new Pose2d(Units.feetToMeters(15.7), Units.feetToMeters(20.8), Rotation2d.fromDegrees(135))
+					new Pose2d(Units.feetToMeters(22.4), Units.feetToMeters(14), Rotation2d.fromDegrees(135)),
+					new Pose2d(Units.feetToMeters(19.4), Units.feetToMeters(16.9), Rotation2d.fromDegrees(135))
 				),
 				Units.feetToMeters(9), Units.feetToMeters(6), false
 			);
 		
+			CustomRamseteCommand splineToBallTwo =
+			RamseteGenerator.getRamseteCommand(
+				drivetrain,
+				List.of(
+					new Pose2d(Units.feetToMeters(19.4), Units.feetToMeters(16.9), Rotation2d.fromDegrees(135)),
+					new Pose2d(Units.feetToMeters(15.7), Units.feetToMeters(20.8), Rotation2d.fromDegrees(135))
+				),
+				Units.feetToMeters(6), Units.feetToMeters(3), false
+			);
 		addCommands(
 			sequence(
 				//reset odometry
 				new InstantCommand(() -> drivetrain.resetOdometry(splineToBallOne.getInitialPose())),
+				splineToBallOne,
 				//Intake first ball
 				deadline(
-					splineToBallOne.andThen(() -> drivetrain.tankDriveVolts(0,0)),
+					splineToBallTwo.andThen(() -> drivetrain.tankDriveVolts(0,0)),
 					new AutoIntake(intake, tower, serializer)
 				),
-				new AutoIntake(intake, tower, serializer).withTimeout(1),
 				//Align and Shoot
-				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(4),
+				new CustomAlignToTarget(drivetrain, limelight, true).withTimeout(2),
 				new AutoShotMid(shooter, tower, serializer).withTimeout(3)
 				
 			)

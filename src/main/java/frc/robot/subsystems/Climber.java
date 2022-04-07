@@ -27,7 +27,7 @@ public class Climber {
         climberEncoder = lClimberMotor.getEncoder();
         highEncoder = lHighMotor.getEncoder();
 
-        lClimberMotor.setSmartCurrentLimit(30);
+        lClimberMotor.setSmartCurrentLimit(40);
         lHighMotor.setSmartCurrentLimit(60);
         rHighMotor.setSmartCurrentLimit(60);
 
@@ -47,7 +47,7 @@ public class Climber {
 
     public void climberUp(){
         if (climberEncoder.getPosition() < maxHeight) {
-            lClimberMotor.set(0.9);
+            lClimberMotor.set(1);
         } else {
             lClimberMotor.set(0);
         }
@@ -55,7 +55,7 @@ public class Climber {
 
     public void climberDown(){
         if (climberEncoder.getPosition() > minHeight) {
-            lClimberMotor.set(-0.9);
+            lClimberMotor.set(-1);
         } else {
             lClimberMotor.set(0);
         }
