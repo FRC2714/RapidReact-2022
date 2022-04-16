@@ -4,6 +4,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DriverStation;
 //import controller buttons
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
@@ -68,6 +69,7 @@ public class RobotContainer {
 		// Configure the button bindings
 		configureButtonBindings();
 		initDefaultCommands();
+		DriverStation.silenceJoystickConnectionWarning(true);
 	}
 
 	public void initDefaultCommands() {

@@ -17,19 +17,19 @@ public class MoveClimber extends CommandBase {
         switch(ClimberMotionType){
             case EXTEND:
             climber.climberUp();
-            System.out.println("Climbing Up");
+            //System.out.println("Climbing Up");
             break; 
             case RETRACT:
             climber.climberDown();
-            System.out.println("Climbing Down");
+            //System.out.println("Climbing Down");
             break;
             case REACH:
             climber.highUp();
-            System.out.println("Reaching Out");
+            //System.out.println("Reaching Out");
             break;
             case RECOIL:
             climber.highDown();
-            System.out.println("Pulling Away");
+            //System.out.println("Pulling Away");
             break;
         }
 

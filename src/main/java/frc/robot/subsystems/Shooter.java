@@ -25,13 +25,19 @@ public class Shooter extends SubsystemBase {
 
   private Limelight limelight;
 
+  //OFF
   private double defaultRPM = 0.0;
   private double targetRPM = 0.0;
   private double incrementRPM = 0.0;
 
-  private double closeShotRPM = 2500;
+  //TELEOP RPM
+  private double closeShotRPM = 2750;
   private double midShotRPM = 2900;
-  private double longShotRPM = 3350;
+  private double longShotRPM = 3250;
+
+  //AUTO RPM
+  private double autoCloseShotRPM = 2500;
+  private double autoMidShotRPM = 3150;
 
   public Shooter(Limelight limelight) {
     this.limelight = limelight;
@@ -74,7 +80,7 @@ public class Shooter extends SubsystemBase {
     shooterPID.setReference(-targetRPM, CANSparkMax.ControlType.kVelocity);
   }
 
-  public double getVelocity() { // in rpm
+  public double getVelocity() {
     return shooterEncoder.getVelocity();
   }
 
@@ -93,6 +99,7 @@ public class Shooter extends SubsystemBase {
     return Math.abs(-targetRPM - getVelocity()) < ShooterConstants.kVelocityTolerance;
   }
 
+  //TeleOp
   public void closeShot() {
     setTargetRpm(closeShotRPM);
   }
@@ -104,6 +111,14 @@ public class Shooter extends SubsystemBase {
   public void longShot() {
     setTargetRpm(longShotRPM);
 
+  }
+
+  //Auto
+  public void autoCloseShot(){
+    setTargetRpm(autoCloseShotRPM);
+  }
+  public void autoMidShot(){
+    setTargetRpm(autoMidShotRPM);
   }
 
   public void disable() {

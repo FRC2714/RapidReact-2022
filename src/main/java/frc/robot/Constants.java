@@ -40,7 +40,7 @@ public final class Constants {
         public static double kAlignP = 0.031;
         public static double kAlignD = 0.0003;
 
-        public static double kDriveP = 3.7568; // 3 stable
+        public static double kDriveP = 3.5; // 3 stable
         public static double kDriveI = 0;
         public static double kDriveD = 0;
 
@@ -69,7 +69,7 @@ public final class Constants {
         public static double kSparkMaxP = 0.000035;
         public static double KSparkMaxI = 0;
         public static double KSparkMaxD = 0;
-        public static double kSparkMaxFeedforward = 0.000185; // .00022
+        public static double kSparkMaxFeedforward = 0.000188; // .00022
 
        
 
@@ -95,7 +95,7 @@ public final class Constants {
     }
 
     public static final class ClimberConstants {
-        public static double kGearRatio = 1.0;
+        public static double kGearRatio = 36.0;
         public static double kSprocketRadius = 1.0; // in
 
         public static double kP = 0.1;

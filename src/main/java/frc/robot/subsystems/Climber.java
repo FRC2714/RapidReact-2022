@@ -16,8 +16,8 @@ public class Climber {
     private RelativeEncoder climberEncoder;
     private RelativeEncoder highEncoder; 
     
-    private int maxHeight = 0;
-    private int kMinHeight = 0;
+    private int maxHeight = 182; //182 without messing up turnbuckle 188 perfect
+    private int minHeight = 5;
 
     public Climber(){
         lClimberMotor = new CANSparkMax(ClimberConstants.kLeftMotorPort, CANSparkMaxLowLevel.MotorType.kBrushless);
@@ -27,7 +27,7 @@ public class Climber {
         climberEncoder = lClimberMotor.getEncoder();
         highEncoder = lHighMotor.getEncoder();
 
-        lClimberMotor.setSmartCurrentLimit(30);
+        lClimberMotor.setSmartCurrentLimit(40);
         lHighMotor.setSmartCurrentLimit(60);
         rHighMotor.setSmartCurrentLimit(60);
 
@@ -46,11 +46,19 @@ public class Climber {
     }
 
     public void climberUp(){
-        lClimberMotor.set(-0.5);
+        if (climberEncoder.getPosition() < maxHeight) {
+            lClimberMotor.set(1);
+        } else {
+            lClimberMotor.set(0);
+        }
     }
 
     public void climberDown(){
-        lClimberMotor.set(0.5);
+        if (climberEncoder.getPosition() > minHeight) {
+            lClimberMotor.set(-1);
+        } else {
+            lClimberMotor.set(0);
+        }
     }
 
     public void climbDisable() {
